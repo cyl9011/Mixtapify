@@ -12,8 +12,9 @@ const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your client id
 console.log(client_id);
 const scope = "streaming user-read-private user-read-email user-top-read";
-var redirect_uri =
-  process.env.redirect_uri || `http://localhost:${PORT}/callback`;
+const redirect_uri =
+  process.env.REDIRECT_URI || `http://localhost:${PORT}/auth/callback`;
+const frontend_base = process.env.FRONTEND_BASE || `http://localhost:3000`;
 
 const generateRandomString = (length) => {
   let text = "";
@@ -87,7 +88,7 @@ app.get("/auth/callback", function (req, res) {
     request.post(authOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
         access_token = body.access_token;
-        res.redirect("/auth/token");
+        res.redirect(frontend_base);
       } else {
         res.send("There was an error during authentication.");
       }
