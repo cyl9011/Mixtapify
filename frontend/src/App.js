@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Login from "./components/Login/Login";
+import Build from "./pages/Build/Build";
 import "./App.css";
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     getToken();
   }, []);
 
-  return <>{token === "" ? <Login /> : <p>{token}</p>}</>;
+  return <>{token === "" ? <Login /> : <Build token={token} />}</>;
 }
 
 export default App;

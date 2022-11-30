@@ -27,7 +27,9 @@ function Search({ token }) {
     console.log(json);
   }
 
-  return <p onClick={() => search("all too well")}>hi</p>;
+  return (
+    <p onClick={() => search("all too well")}>click to search to console</p>
+  );
 }
 
 export default Search;
