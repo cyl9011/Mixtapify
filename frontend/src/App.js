@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Login from "./components/Login/Login";
 import Build from "./pages/Build/Build";
+import DesignCassette from "./pages/DesignCassette";
 import "./App.css";
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
     getToken();
   }, []);
 
-  return <>{token === "" ? <Login /> : <Build token={token} />}</>;
+  // return <>{token === "" ? <Login /> : <Build token={token} />}</>;
+  return <DesignCassette />
 }
 
 export default App;
