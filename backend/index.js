@@ -35,7 +35,9 @@ const trackSchema = new mongoose.Schema({
   name: String,
   duration_ms: String,
   artists: String,
+  album: String,
   annotation: String,
+  image: String,
 });
 const Track = mongoose.model("Track", trackSchema);
 
@@ -118,4 +120,27 @@ app.get("/auth/token", (req, res) => {
   res.json({
     access_token: access_token,
   });
+});
+
+app.post("/api/create", (req, res) => {
+  // console.log("body", req.body);
+  Playlist.create({
+    ...req.body,
+    date: Date.now(),
+  }).then((posts) => {
+    console.log("posts created!", posts);
+    res.redirect(`${frontend_base}/`);
+  });
+});
+
+app.get("/api/playlist/:id", (req, res) => {
+  // console.log("body", req.id);
+  console.log(req);
+  // Playlist.findById(req.user.id, function (err, foundUser) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log(foundUser);
+  //   }
+  // });
 });
