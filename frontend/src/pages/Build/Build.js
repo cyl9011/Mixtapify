@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Search from "../../components/Search/Search";
 
 function Build({ token }) {
-  return <Search token={token} />;
+  const [playlist, setPlaylist] = useState([]);
+
+  return <Search setPlaylist={setPlaylist} playlist={playlist} token={token} />;
 }
 
 export default Build;
