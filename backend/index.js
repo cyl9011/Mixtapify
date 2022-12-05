@@ -29,6 +29,24 @@ const generateRandomString = (length) => {
 
 const stateKey = "spotify_auth_state";
 
+mongoose.connect("mongodb://localhost:27017/mixtapes");
+const trackSchema = new mongoose.Schema({
+  spotifyID: String,
+  name: String,
+  duration_ms: String,
+  artists: String,
+  annotation: String,
+});
+const Track = mongoose.model("Track", trackSchema);
+
+const playlistSchema = new mongoose.Schema({
+  from: String,
+  to: String,
+  tracks: [trackSchema],
+  date: Date,
+});
+const Playlist = mongoose.model("Playlist", playlistSchema);
+
 app
   .use(express.json())
   .use(express.urlencoded({ extended: true }))
