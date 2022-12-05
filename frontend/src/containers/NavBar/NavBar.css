@@ -1,0 +1,81 @@
+#navbarContainer img {
+  width: 10%;
+  height: 10%;
+  display: inline-block;
+}
+
+#navbarContainer h1 {
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #000;
+}
+
+#shoppingCartContainer {
+  display: inline-block;
+  align-items: left;
+
+  padding: 0px;
+  margin: 0px;
+  margin-left: 0rem;
+  border-radius: 15%;
+  background-color: #ac2432;
+
+  height: 5%;
+  width: 5%;
+}
+
+#shoppingCartContainer img {
+  padding-left: 0px;
+  margin: 0px;
+  padding-right: 30px;
+
+  height: 100%;
+    width: 55%;
+  
+}
+
+#redBlock {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin-top: 0.2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0px;
+  margin-right: 0px;
+  background-color: #ac2432;
+}
+
+#navbarContainer ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: white;
+  border-top: 0.01px solid black;
+  border-width: thin;
+}
+
+/* no bullet points for the list */
+#navbarContainer ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+}
+
+#navbarContainer li {
+  padding: 0 10px;
+  text-decoration: none;
+  color: white;
+}
+
+#navbarContainer li a {
+  text-decoration: none;
+  color: #ac2432;
+}

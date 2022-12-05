@@ -1,0 +1,21 @@
+.details {
+    display: inline-block;
+}
+
+img {
+    width: 300px;
+    height: 300px;
+}
+
+#shirtPicture {
+    display: inline-block;
+}
+
+#shirtDescription {
+    display: inline-block;
+    width: 50%;
+}
+
+#DropdownItem {
+    display: block;
+}

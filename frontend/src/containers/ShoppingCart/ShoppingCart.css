@@ -1,0 +1,11 @@
+#quantity h3 {
+    display: inline-block;
+}
+
+#cart {
+    display: inline-block;
+}
+
+#order {
+    display: inline-block;
+}
