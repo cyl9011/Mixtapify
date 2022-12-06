@@ -1,0 +1,9 @@
+.track {
+  display: flex;
+  width: 40vw;
+}
+.trackInfo,
+.tracks {
+  display: flex;
+  flex-direction: column;
+}

@@ -16,3 +16,7 @@ export const refreshToken = (setToken) => {
     setToken(json.access_token);
   };
 };
+
+export const idFn = () => {
+  return undefined;
+};
