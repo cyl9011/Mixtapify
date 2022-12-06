@@ -391,12 +391,7 @@ const SVGLayer = () => {
   }
 
   return (
-    <div
-      id="cassette"
-      onClick={() => {
-        console.log(document.getElementById("cassette").outerHTML);
-      }}
-    >
+    <div id="cassette">
       <svg
         id="workspace-svg"
         width="500"

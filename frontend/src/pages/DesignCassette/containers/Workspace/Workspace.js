@@ -3,7 +3,7 @@ import SVGLayer from "./SVGLayer/SVGLayer";
 
 import "./Workspace.css";
 
-const Workspace = () => {
+const Workspace = ({ setCassette }) => {
   return (
     <div className="Workspace">
       <SVGLayer />

@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+import AuthContext from "../../lib/AuthContext";
 import Search from "../../components/Search/Search";
 import Tracks from "../../components/Tracks/Tracks";
 
 function Build() {
   const [playlist, setPlaylist] = useState([]);
+  const { mixtape, setMixtape } = useContext(AuthContext);
+
+  console.log(mixtape);
+
   const navigate = useNavigate();
 
   const createPlaylist = () => {
@@ -22,8 +27,7 @@ function Build() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Michelle",
-        to: "SSUI",
+        ...mixtape,
         tracks,
         date: Date.now(),
       }),
@@ -42,6 +46,7 @@ function Build() {
 
   return (
     <>
+      <div dangerouslySetInnerHTML={{ __html: mixtape.cassette }}></div>
       <Tracks tracks={playlist} deleteTrack={deleteTrack} />
       <Search setPlaylist={setPlaylist} playlist={playlist} />
       <button onClick={createPlaylist}>Create Playlist</button>
