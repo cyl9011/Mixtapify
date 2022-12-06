@@ -1,9 +1,7 @@
 import React from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
   NavbarBrand,
   Nav,
   NavItem,
@@ -14,17 +12,12 @@ import appRoutes from "../../shared/appRoutes";
 import "./NavBar.css";
 
 const NavBar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div id="nav">
       <div id="navbarContainer">
-        <Navbar className="bg-dark" color="bg-dark" expand="md">
-          <NavbarBrand tag={RouterNavLink} to={appRoutes.home}>
-            <div className="welcome">Welcome to Mixtapify</div>
-          </NavbarBrand>
+        <div className="bg-dark" color="bg-dark" expand="md">
+
           <Nav className="me-auto" navbar>
             <NavItem>
               <NavLink tag={RouterNavLink} to={appRoutes.home}>
@@ -62,7 +55,7 @@ const NavBar = () => {
               </NavLink>
             </NavItem>
           </Nav>
-        </Navbar>
+        </div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import appRoutes from "../../shared/appRoutes.js";
 
 const Title = () => {
   return (
-    <div>
+    <div className="title">
     Title
     </div>
   );

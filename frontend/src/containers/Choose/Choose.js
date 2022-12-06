@@ -6,7 +6,7 @@ import "./Choose.css";
 import appRoutes from "../../shared/appRoutes.js";
 
 const Choose = () => {
-  return <div>Choose</div>;
+  return <div className="choose">Choose</div>;
 };
 
 export default Choose;

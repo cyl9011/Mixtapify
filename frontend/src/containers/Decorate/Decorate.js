@@ -6,7 +6,7 @@ import "./Decorate.css";
 import appRoutes from "../../shared/appRoutes.js";
 
 const Decorate = () => {
-  return <div>Decorate</div>;
+  return <div className="decorate">Decorate</div>;
 };
 
 export default Decorate;

@@ -12,7 +12,6 @@ import Title from "./containers/Title/Title";
 import Decorate from "./containers/Decorate/Decorate";
 import Choose from "./containers/Choose/Choose";
 import Cassette from "./containers/Cassette/Cassette";
-import Detail from "./containers/Detail/Detail";
 import NotImplemented from "./containers/NotImplemented/NotImplemented";
 
 import "./App.css";
@@ -52,7 +51,6 @@ const App = () => {
           <Route path={appRoutes.decorate} element={<Decorate />} />
           <Route path={appRoutes.choose} element={<Choose />} />
           <Route path={appRoutes.cassette} element={<Cassette />} />
-          <Route path={appRoutes.detail} element={<Detail/>} />
           <Route path={appRoutes.notImplemented} element={<NotImplemented />} />
         </Routes>
       </div>

@@ -6,7 +6,7 @@ import "./Home.css";
 const Home = () => {
   return (
     <div className="home">
-      Home
+      Welcome to Mixtapify
     </div>
   );
 };

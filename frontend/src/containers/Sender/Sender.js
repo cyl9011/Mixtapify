@@ -9,11 +9,9 @@ import { Link } from "react-router-dom";
 
 import { Col } from "reactstrap";
 
-import detail from "../Detail/Detail.js";
-
 const Sender = () => {
   return (
-    <div>
+    <div className="sender">
     Sender
     </div>
   );

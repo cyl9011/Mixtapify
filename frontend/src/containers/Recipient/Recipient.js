@@ -7,7 +7,7 @@ import appRoutes from "../../shared/appRoutes.js";
 
 const Recipient = () => {
   return (
-    <div>
+    <div className="recipient">
     Recipient
     </div>
   );

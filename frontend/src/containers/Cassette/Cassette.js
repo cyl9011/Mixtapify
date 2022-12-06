@@ -6,7 +6,7 @@ import "./Cassette.css";
 import appRoutes from "../../shared/appRoutes.js";
 
 const Cassette = () => {
-  return <div>Cassette</div>;
+  return <div className="cassette">Cassette</div>;
 };
 
 export default Cassette;
