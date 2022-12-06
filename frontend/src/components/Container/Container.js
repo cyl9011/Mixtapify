@@ -17,8 +17,10 @@ const Container = ({ children }) => {
       <NavBar />
       <div className={styles.container}>
         <div className={styles.background}></div>
-        <h1>{pageName}</h1>
-        {children}
+        <div className={styles.content}>
+          <h1>{pageName}</h1>
+          {children}
+        </div>
       </div>
     </div>
   );

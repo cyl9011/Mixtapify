@@ -6,6 +6,9 @@ import appRoutes from "../../lib/appRoutes";
 import "./NavBar.css";
 
 const NavBar = () => {
+  const location = useLocation();
+  const curRoute = location.pathname.replaceAll("/", "");
+
   return (
     <div id="nav">
       <div id="navbarContainer">
@@ -18,11 +21,18 @@ const NavBar = () => {
                   page.route.includes("not-implemented")
                 )
             )
-            .map((page) => {
+            .map((navItem) => {
+              const { route, page } = navItem;
+              const onCurRoute = route.replaceAll("/", "") === curRoute;
+
               return (
-                <NavItem>
-                  <NavLink tag={RouterNavLink} to={page.route}>
-                    {page.page}
+                <NavItem key={page}>
+                  <NavLink
+                    tag={RouterNavLink}
+                    to={route}
+                    className={onCurRoute ? "enabled-link" : "disabled-link"}
+                  >
+                    {page}
                   </NavLink>
                 </NavItem>
               );

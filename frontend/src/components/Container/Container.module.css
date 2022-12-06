@@ -4,6 +4,10 @@
   font-size: 3rem;
   position: relative;
 }
+.content {
+  position: relative;
+  z-index: 100;
+}
 h1 {
   color: white;
   font-size: 1em;
