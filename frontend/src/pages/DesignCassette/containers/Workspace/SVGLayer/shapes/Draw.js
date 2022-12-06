@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ id, paths, borderColor, borderWidth }) => {
+export default ({ id, paths, borderColor, borderWidth, filter }) => {
   const FinalPaths = paths
     .map((_points) => {
       let path = "";
@@ -29,6 +29,7 @@ export default ({ id, paths, borderColor, borderWidth }) => {
         strokeWidth={borderWidth}
         d={path}
         fill="none"
+        filter={filter}
       />
     );
   });

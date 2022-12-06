@@ -15,9 +15,12 @@ import ControlContext from "../../../contexts/control-context";
 import { selectShadowId } from "../../../shared/util";
 
 import CassetteImg from "../../../assets/cassettes/1099 1.jpg";
+import Sticker from "./shapes/Sticker";
 
 const SVGLayer = () => {
   const svgRef = useRef();
+  const FirstNameRef = useRef();
+  const LastNameRef = useRef();
 
   const [paths, setPaths] = useState([[]]);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -31,48 +34,12 @@ const SVGLayer = () => {
     setTop(top);
   }, []);
 
-  function handleDrawMouseDown() {
-    if (!isDrawing) {
-      // setPaths([].concat(paths, [[]]));
-      setPaths([[]]);
-    }
-    setIsDrawing(true);
-    setDrawing(true);
-  }
-
-  function handleDrawMouseMove(e) {
-    if (isDrawing) {
-      const x = e.pageX - left;
-      const y = e.pageY - top;
-      const tempPaths = paths.slice(0);
-      tempPaths[tempPaths.length - 1].push({ x, y });
-      setPaths(tempPaths);
-    }
-  }
-
-  function handleDrawMouseUp() {
-    addShape({
-      type: currMode,
-      visible: true,
-      paths: paths,
-      initCoords: initPoint,
-      finalCoords: currPoint,
-      borderColor: currBorderColor,
-      borderWidth: currBorderWidth,
-      fillColor: currFillColor,
-    });
-
-    if (isDrawing) {
-      setIsDrawing(false);
-    }
-    setDrawing(false);
-  }
-
   const {
     currCassette,
     currMode,
     currBorderColor,
     currBorderWidth,
+    currStickerSize,
     currFillColor,
     shapes,
     shapesMap,
@@ -99,7 +66,13 @@ const SVGLayer = () => {
   });
 
   const handleMouseDown = (e) => {
-    if (currMode !== "select") {
+    if (currMode == "draw") {
+      if (!isDrawing) {
+        setPaths([[]]);
+      }
+      setIsDrawing(true);
+      setDrawing(true);
+    } else if (currMode !== "select") {
       // should create
       setDrawing(true);
       setInitPoint({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
@@ -107,6 +80,7 @@ const SVGLayer = () => {
       e.preventDefault();
     } else {
       // should select
+      console.log(e.target.nodeName);
       if (e.target.nodeName === "svg") {
         // deselect
         selectShape(undefined);
@@ -127,27 +101,53 @@ const SVGLayer = () => {
   };
 
   const handleMouseMove = (e) => {
-    if (drawing) {
-      setCurrPoint({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
-    } else if (dragging && draggingShape) {
-      const deltaX = e.nativeEvent.offsetX - mouseDownPoint.x;
-      const deltaY = e.nativeEvent.offsetY - mouseDownPoint.y;
+    if (currMode == "draw") {
+      if (isDrawing) {
+        const x = e.pageX - left;
+        const y = e.pageY - top;
+        const tempPaths = paths.slice(0);
+        tempPaths[tempPaths.length - 1].push({ x, y });
+        setPaths(tempPaths);
+      }
+    } else {
+      if (drawing) {
+        setCurrPoint({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
+      } else if (dragging && draggingShape) {
+        const deltaX = e.nativeEvent.offsetX - mouseDownPoint.x;
+        const deltaY = e.nativeEvent.offsetY - mouseDownPoint.y;
 
-      moveShapeHelper({
-        initCoords: {
-          x: draggingShape.initCoords.x + deltaX,
-          y: draggingShape.initCoords.y + deltaY,
-        },
-        finalCoords: {
-          x: draggingShape.finalCoords.x + deltaX,
-          y: draggingShape.finalCoords.y + deltaY,
-        },
-      });
+        moveShapeHelper({
+          initCoords: {
+            x: draggingShape.initCoords.x + deltaX,
+            y: draggingShape.initCoords.y + deltaY,
+          },
+          finalCoords: {
+            x: draggingShape.finalCoords.x + deltaX,
+            y: draggingShape.finalCoords.y + deltaY,
+          },
+        });
+      }
     }
   };
 
   const handleMouseUp = (e) => {
-    if (currMode !== "select") {
+    if (currMode == "draw") {
+      addShape({
+        type: currMode,
+        visible: true,
+        paths: paths,
+        initCoords: initPoint,
+        finalCoords: currPoint,
+        borderColor: currBorderColor,
+        borderWidth: currBorderWidth,
+        fillColor: currFillColor,
+      });
+
+      if (isDrawing) {
+        setIsDrawing(false);
+      }
+      setDrawing(false);
+    } else if (currMode !== "select") {
       if (!(initPoint.x === currPoint.x && initPoint.y === currPoint.y)) {
         // check if it's too small
         const threshold = 10;
@@ -202,6 +202,12 @@ const SVGLayer = () => {
     }
   };
 
+  useEffect(() => {
+    if(currMode == "text"){
+      handleText(FirstNameRef);
+    }
+  }, [currMode]);
+
   // useCallback gives a memoized version of the callback that changes when one of its dependencies change
   // the first argument is the function that will be run
   // the second is the dependencies that the function relies on
@@ -250,16 +256,28 @@ const SVGLayer = () => {
       borderWidth,
       fillColor,
       id,
+      stickerImg,
+      stickerSize,
     } = shapeData;
     const filter =
       targetShapeId && targetShapeId === id ? `url(#${selectShadowId})` : null;
     switch (shapeData.type) {
+      case "sticker": {
+        return React.createElement(Sticker, {
+          stickerImg,
+          initCoords,
+          stickerSize,
+          id,
+          filter,
+        });
+      }
       case "draw": {
         return React.createElement(Draw, {
           paths,
           borderColor,
           borderWidth,
           id,
+          filter,
         });
       }
       case "line": {
@@ -342,6 +360,34 @@ const SVGLayer = () => {
     }
   };
 
+  function handleText(ref) {
+    var input = document.createElement("input");
+    input.value = ref.current.textContent;
+    input.onkeyup = function (e) {
+      if (["Enter", "Escape"].includes(e.key)) {
+        this.blur();
+        return;
+      }
+      ref.current.textContent = this.value;
+    };
+    input.onblur = function (e) {
+      myforeign.remove();
+    };
+
+    var myforeign = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "foreignObject"
+    );
+    myforeign.setAttribute("width", "100%");
+    myforeign.setAttribute("height", "100%");
+    myforeign.append(input);
+
+    const svg = ref.current.parentNode;
+    svg.appendChild(myforeign);
+
+    input.focus();
+  }
+
   return (
     <>
       <svg
@@ -349,9 +395,9 @@ const SVGLayer = () => {
         width="500"
         height="350"
         ref={svgRef}
-        onMouseDown={currMode == "draw" ? handleDrawMouseDown : handleMouseDown}
-        onMouseMove={currMode == "draw" ? handleDrawMouseMove : handleMouseMove}
-        onMouseUp={currMode == "draw" ? handleDrawMouseUp : handleMouseUp}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
       >
         <filter
           id={selectShadowId}
@@ -372,6 +418,38 @@ const SVGLayer = () => {
           return renderShape(shapesMap[shapeId], idx);
         })}
         {drawing && renderTempShape()}
+        <text
+          x="200"
+          y="40"
+          style={{ font: "bold italic 20px Lucida Handwriting", fill: currBorderColor }}
+        >
+          To:
+        </text>
+        <text
+          x="240"
+          y="40"
+          onClick={() => handleText(FirstNameRef)}
+          ref={FirstNameRef}
+          style={{ font: "italic 20px Lucida Handwriting", fill: currBorderColor }}
+        >
+          Name
+        </text>
+        <text
+          x="200"
+          y="60"
+          style={{ font: "bold italic 20px Lucida Handwriting", fill: currBorderColor }}
+        >
+          From:
+        </text>
+        <text
+          x="270"
+          y="60"
+          onClick={() => handleText(LastNameRef)}
+          ref={LastNameRef}
+          style={{ font: "italic 20px Lucida Handwriting", fill: currBorderColor }}
+        >
+          Name
+        </text>
       </svg>
       <img src={currCassette} width="500" height="350" />
     </>

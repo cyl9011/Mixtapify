@@ -10,8 +10,10 @@ export const selectShadowId = "select-shadow";
 
 export const defaultValues = {
   cassette: GreenCassette,
-  mode: "line", // 'select', 'line', 'rect', 'ellipse',
+  sticker: "",
+  mode: "draw", // 'select', 'line', 'rect', 'ellipse', 'draw', 'stickers'
   borderColor: "#000",
   borderWidth: 3,
   fillColor: "#9fce63",
+  stickerSize: 50
 };

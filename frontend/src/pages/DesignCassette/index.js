@@ -20,10 +20,13 @@ class DesignCassette extends Component {
     currCassette: defaultValues.cassette,
     currBorderColor: defaultValues.borderColor,
     currMode: defaultValues.mode,
+    currSticker: defaultValues.sticker,
     currBorderColor: defaultValues.borderColor,
     currBorderWidth: defaultValues.borderWidth,
     currFillColor: defaultValues.fillColor,
+    currStickerSize: defaultValues.stickerSize,
     prevBorderWidth: undefined,
+    prevStickerSize: undefined,
     prevLocation: undefined,
 
     // workspace
@@ -111,7 +114,7 @@ class DesignCassette extends Component {
 
   // add the shapeId to the array, and the shape itself to the map
   addShape = (shapeData) => {
-    const newId = genId()
+    const newId = genId();
     this.undoHandler.shapeId = newId;
     console.log(newId);
     this.undoHandler.selectedObj = shapeData;
@@ -249,6 +252,10 @@ class DesignCassette extends Component {
 
   changeCurrCassette = (cassette) => {
     this.setState({ currCassette: cassette });
+  };
+
+  changeCurrSticker = (sticker) => {
+    this.setState({ currSticker: sticker });
   };
 
   changeCurrMode = (mode) => {
@@ -400,12 +407,79 @@ class DesignCassette extends Component {
     obj.execute();
   };
 
+  changeStickerSize = (stickerSize) => {
+    let shapesMapCopy = { ...this.state.shapesMap };
+    this.undoHandler.selectedObj = shapesMapCopy[this.state.targetShapeId];
+    this.undoHandler.shapeId = this.state.targetShapeId;
+    this.undoHandler.oldValue = this.state.currStickerSize;
+    this.undoHandler.newValue = stickerSize;
+
+    const changeStickerSizeCommand = (
+      shapeId,
+      oldValue = null,
+      newValue = null
+    ) => {
+      if (!this.state.prevStickerSize) {
+        this.setState({ prevStickerSize: oldValue });
+      }
+      const stickerSize = newValue;
+      this.setState({ currStickerSize: stickerSize });
+      if (shapeId != null) {
+        this.updateShape(shapeId, { stickerSize });
+      }
+    };
+    this.undoHandler.executeCommand = changeStickerSizeCommand;
+
+    let obj = new ChangeBorderCommandObject(this.undoHandler, false);
+    obj.execute();
+  };
+
+  changeCurrStickerSize = (stickerSize) => {
+    let shapesMapCopy = { ...this.state.shapesMap };
+    this.undoHandler.selectedObj = shapesMapCopy[this.state.targetShapeId];
+    this.undoHandler.shapeId = this.state.targetShapeId;
+    this.undoHandler.oldValue = this.state.prevStickerSize;
+    this.undoHandler.newValue = stickerSize;
+
+    const execute = (shapeId, oldValue = null, newValue = null) => {
+      this.setState({ prevStickerSize: undefined });
+      this.setState({ currStickerSize: newValue });
+      if (shapeId != null) {
+        this.updateShape(shapeId, { stickerSize: newValue });
+      }
+    };
+
+    const undo = (shapeId, oldValue = null, newValue = null) => {
+      this.setState({ prevStickerSize: undefined });
+      this.setState({ currStickerSize: oldValue });
+      if (shapeId != null) {
+        this.updateShape(shapeId, { stickerSize: oldValue });
+      }
+    };
+
+    const redo = (shapeId, oldValue = null, newValue = null) => {
+      this.setState({ currStickerSize: newValue });
+      if (shapeId != null) {
+        this.updateShape(shapeId, { stickerSize: newValue });
+      }
+    };
+
+    this.undoHandler.executeCommand = execute;
+    this.undoHandler.executeUndo = undo;
+    this.undoHandler.executeRedo = redo;
+
+    let obj = new ChangeBorderCommandObject(this.undoHandler);
+    obj.execute();
+  };
+
   render() {
     const {
       currCassette,
       currMode,
+      currSticker,
       currBorderColor,
       currBorderWidth,
+      currStickerSize,
       currFillColor,
       shapes,
       shapesMap,
@@ -422,11 +496,16 @@ class DesignCassette extends Component {
             changeCurrCassette: this.changeCurrCassette,
             currMode,
             changeCurrMode: this.changeCurrMode,
+            currSticker,
+            changeCurrSticker: this.changeCurrSticker,
             currBorderColor,
             changeCurrBorderColor: this.changeCurrBorderColor,
             currBorderWidth,
             changeBorderWidth: this.changeBorderWidth,
             changeCurrBorderWidth: this.changeCurrBorderWidth,
+            currStickerSize,
+            changeStickerSize: this.changeStickerSize,
+            changeCurrStickerSize: this.changeCurrStickerSize,
             currFillColor,
             changeCurrFillColor: this.changeCurrFillColor,
 

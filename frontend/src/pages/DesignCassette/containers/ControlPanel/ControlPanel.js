@@ -6,6 +6,7 @@ import { ImUndo, ImRedo } from "react-icons/im";
 import CursorImg from "../../assets/img/cursor.png";
 import LineImg from "../../assets/img/line.png";
 import DrawImg from "../../assets/img/draw.png";
+import TextImg from "../../assets/img/text.png";
 import GreenCassette from "../../assets/cassettes/1099 1.jpg";
 import BrownCassette from "../../assets/cassettes/1099 2.jpg";
 import YellowCassette from "../../assets/cassettes/1099 3.jpg";
@@ -15,10 +16,28 @@ import RedCassette from "../../assets/cassettes/1099 6.jpg";
 import supportedColors from "../../shared/supportedColors";
 import ControlContext from "../../contexts/control-context";
 
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import TextField from "@mui/material/TextField";
+import InboxIcon from "@mui/icons-material/Inbox";
+
+import HeartImage from "../../assets/stickers/heart.png";
+import StarImage from "../../assets/stickers/star.png";
+import FireImage from "../../assets/stickers/fire.png";
+import RainbowImage from "../../assets/stickers/rainbow.png";
+
 import "./ControlPanel.css";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  stickerSelect: {
+    width: "100px",
+  },
+}));
 
 const CassetteColor = ({ currCassette, changeCurrCassette }) => {
-  console.log(currCassette);
   return (
     <div className="Control">
       <h3>Cassette:</h3>
@@ -85,9 +104,27 @@ const CassetteColor = ({ currCassette, changeCurrCassette }) => {
 const Modes = ({
   currMode,
   changeCurrMode,
-  currBorderColor,
-  currFillColor,
+  addShape,
+  changeCurrSticker,
+  currStickerSize,
 }) => {
+  const classes = useStyles();
+  const handleStickerChange = (e) => {
+    changeCurrMode("sticker");
+    changeCurrSticker(e.target.value);
+    addShape({
+      type: "sticker",
+      visible: true,
+      stickerImg: e.target.value,
+      initCoords: { x: 225, y: 180 },
+      finalCoords: { x: 20, y: 20 },
+      borderColor: "transparent",
+      borderWidth: 3,
+      fillColor: "transparent",
+      stickerSize: currStickerSize,
+    });
+  };
+
   return (
     <div className="Control">
       <h3>Mode:</h3>
@@ -106,7 +143,37 @@ const Modes = ({
         >
           <img src={DrawImg} alt="draw" />
         </div>
+        <TextField
+          id="standard-select-currency"
+          select
+          label="Stickers"
+          size="small"
+          classes={{ root: classes.stickerSelect }}
+          onChange={handleStickerChange}
+        >
+          <MenuItem
+            value={HeartImage || null}
+            classes={{ root: classes.stickerItem }}
+          >
+            <img src={HeartImage} width="20" height="20" />
+          </MenuItem>
+          <MenuItem value={StarImage || null}>
+            <img src={StarImage} width="20" height="20" />
+          </MenuItem>
+          <MenuItem value={FireImage || null}>
+            <img src={FireImage} width="20" height="20" />
+          </MenuItem>
+          <MenuItem value={RainbowImage || null}>
+            <img src={RainbowImage} width="20" height="20" />
+          </MenuItem>
+        </TextField>
         <div
+          className={["Mode", currMode === "text" ? "Active" : null].join(" ")}
+          onClick={() => changeCurrMode("text")}
+        >
+          <img src={TextImg} alt="text" />
+        </div>
+        {/* <div
           className={["Mode", currMode === "line" ? "Active" : null].join(" ")}
           onClick={() => changeCurrMode("line")}
         >
@@ -140,7 +207,7 @@ const Modes = ({
               borderRadius: "50%",
             }}
           ></div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -250,6 +317,33 @@ const BorderWidth = ({
   );
 };
 
+const StickerSize = ({
+  currStickerSize,
+  changeStickerSize,
+  changeCurrStickerSize,
+}) => {
+  console.log(changeCurrStickerSize);
+  return (
+    <div className="Control">
+      <h3>Sticker Size:</h3>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <input
+          type="range"
+          tabIndex="-1"
+          style={{ width: 200 }}
+          onChange={(e) => changeStickerSize(e.target.value)}
+          min={10}
+          max={100}
+          value={currStickerSize}
+          onMouseUp={(e) => changeCurrStickerSize(e.target.value)}
+        />
+        &nbsp;&nbsp;&nbsp;
+        <span>{currStickerSize}</span>
+      </div>
+    </div>
+  );
+};
+
 const Delete = ({ targetShapeId, deleteShape }) => {
   return (
     <div className="Control">
@@ -297,6 +391,8 @@ const ControlPanel = () => {
     changeCurrCassette,
     currMode,
     changeCurrMode,
+    currSticker,
+    changeCurrSticker,
     currBorderColor,
     changeCurrBorderColor,
     currFillColor,
@@ -304,12 +400,16 @@ const ControlPanel = () => {
     currBorderWidth,
     changeBorderWidth,
     changeCurrBorderWidth,
+    currStickerSize,
+    changeStickerSize,
+    changeCurrStickerSize,
     targetShapeId,
     deleteShape,
     undo,
     redo,
     currCommand,
     commandLength,
+    addShape,
   } = useContext(ControlContext);
 
   return (
@@ -321,8 +421,11 @@ const ControlPanel = () => {
       <Modes
         currMode={currMode}
         changeCurrMode={changeCurrMode}
+        addShape={addShape}
+        changeCurrSticker={changeCurrSticker}
         currBorderColor={currBorderColor}
         currFillColor={currFillColor}
+        currStickerSize={currStickerSize}
       />
       <BorderColor
         currMode={currMode}
@@ -335,11 +438,16 @@ const ControlPanel = () => {
         changeBorderWidth={changeBorderWidth}
         changeCurrBorderWidth={changeCurrBorderWidth}
       />
-      <FillColor
+      <StickerSize
+        currStickerSize={currStickerSize}
+        changeStickerSize={changeStickerSize}
+        changeCurrStickerSize={changeCurrStickerSize}
+      />
+      {/* <FillColor
         currFillColor={currFillColor}
         changeCurrFillColor={changeCurrFillColor}
         currBorderColor={currBorderColor}
-      />
+      />  */}
       <Delete targetShapeId={targetShapeId} deleteShape={deleteShape} />
       <UndoRedo
         undo={undo}

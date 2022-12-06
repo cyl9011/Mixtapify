@@ -98,3 +98,11 @@
   border: 1px solid lightgray;
   user-select: none;
 }
+
+#standard-select-currency {
+  text-align: center;
+}
+
+#standard-select-currency > img {
+  vertical-align: middle;
+}
