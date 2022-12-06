@@ -31,7 +31,7 @@ const stateKey = "spotify_auth_state";
 
 mongoose.connect("mongodb://localhost:27017/mixtapes");
 const trackSchema = new mongoose.Schema({
-  spotifyID: String,
+  id: String,
   name: String,
   duration_ms: String,
   artists: String,

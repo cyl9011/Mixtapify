@@ -1,3 +1,8 @@
+export const queryString = (params) =>
+  Object.keys(params)
+    .map((key) => key + "=" + params[key])
+    .join("&");
+
 export const fromMS = (ms) => {
   const d = new Date(Date.UTC(0, 0, 0, 0, 0, 0, ms));
   // Pull out parts of interest
@@ -19,4 +24,22 @@ export const refreshToken = (setToken) => {
 
 export const idFn = () => {
   return undefined;
+};
+
+export const extractTrackInfo = (tracks) => {
+  return tracks?.map((track) => {
+    const { album, artists, duration_ms, name, id } = track;
+    const image = album.images[0].url;
+    const artistStr = artists.map(({ name }) => name).join(", ");
+    const albumName = album.name;
+
+    return {
+      image,
+      duration_ms,
+      name,
+      id,
+      album: albumName,
+      artists: artistStr,
+    };
+  });
 };

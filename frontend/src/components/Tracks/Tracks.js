@@ -3,17 +3,14 @@ import { fromMS, idFn } from "../../lib/helpers";
 
 function Tracks({ tracks, addToPlaylist }) {
   return tracks?.map((track, index) => {
-    const { album, artists, duration_ms, name } = track;
+    const { image, duration_ms, name, album, artists } = track;
     const key = `${name} option ${index}`;
-    const image = album.images[0].url;
-    const artistStr = artists.map(({ name }) => name).join(", ");
-    const albumName = album.name;
 
     return (
       <Track
         image={image}
-        artists={artistStr}
-        album={albumName}
+        artists={artists}
+        album={album}
         duration_ms={duration_ms}
         key={key}
         name={name}
