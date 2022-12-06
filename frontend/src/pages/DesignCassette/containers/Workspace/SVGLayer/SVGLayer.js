@@ -6,6 +6,8 @@ import React, {
   useRef,
 } from "react";
 
+import html2canvas from 'html2canvas';
+
 import Line from "./shapes/Line";
 import Rect from "./shapes/Rect";
 import Ellipse from "./shapes/Ellipse";
@@ -391,14 +393,23 @@ const SVGLayer = () => {
   }
 
   function downloadSVGAsText() {
-    const svg = document.querySelector('.Workspace').querySelector("svg");
-    console.log(svg)
+    const svg = document.querySelector(".Workspace").querySelector("svg");
+    console.log(svg);
     const base64doc = btoa(unescape(encodeURIComponent(svg.outerHTML)));
-    const a = document.createElement('a');
-    const e = new MouseEvent('click');
-    a.download = 'download.svg';
-    a.href = 'data:image/svg+xml;base64,' + base64doc;
+    const a = document.createElement("a");
+    const e = new MouseEvent("click");
+    a.download = "download.svg";
+    a.href = "data:image/svg+xml;base64," + base64doc;
     a.dispatchEvent(e);
+  }
+
+  // when called, will open a new tab with the SVG
+  // which can then be right-clicked and 'save as...'
+  function saveSVG() {
+    var c = html2canvas(document.querySelector(".Workspace")).then((canvas) => {
+      document.body.appendChild(canvas);
+    });
+    window.open("", document.querySelector(".Workspace").toDataURL());
   }
 
   return (
@@ -471,7 +482,7 @@ const SVGLayer = () => {
         </text>
       </svg>
       <img src={currCassette} width="500" height="350" />
-      <button onClick={(e) => downloadSVGAsText(e)}>NEXT STEP</button>
+      <button onClick={(e) => saveSVG()}>NEXT STEP</button>
     </>
   );
 };

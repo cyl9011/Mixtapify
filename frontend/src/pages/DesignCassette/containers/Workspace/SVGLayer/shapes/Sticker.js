@@ -3,8 +3,8 @@ import React from "react";
 export default ({ id, stickerImg, initCoords, stickerSize, filter }) => {
   console.log(stickerSize);
   return (
-    <image
-      href={stickerImg}
+    <img
+      xlinkHref={stickerImg}
       width={stickerSize}
       height={stickerSize}
       id={id}
@@ -15,6 +15,6 @@ export default ({ id, stickerImg, initCoords, stickerSize, filter }) => {
         zIndex: "9",
       }}
       filter={filter}
-    ></image>
+    ></img>
   );
 };
