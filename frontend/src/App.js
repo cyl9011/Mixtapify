@@ -51,7 +51,7 @@ const App = () => {
           <Route path={appRoutes.sender} element={<Sender />} />
           <Route path={appRoutes.recipient} element={<Recipient />} />
           <Route path={appRoutes.title} element={<Title />} />
-          <Route path={appRoutes.decorate} element={<Decorate />} />
+          <Route path={appRoutes.decorate} element={<DesignCassette />} />
           <Route path={appRoutes.choose} element={<Choose />} />
           <Route path={appRoutes.cassette} element={<Cassette />} />
           <Route path={appRoutes.notImplemented} element={<NotImplemented />} />
