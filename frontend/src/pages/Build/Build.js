@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Search from "../../components/Search/Search";
 
-function Build({ token }) {
+function Build() {
   const [playlist, setPlaylist] = useState([]);
+
   const createPlaylist = () => {
     const tracks = playlist.map((track) => {
       const { id, album, artists, duration_ms, name } = track;
@@ -35,7 +36,7 @@ function Build({ token }) {
   };
   return (
     <>
-      <Search setPlaylist={setPlaylist} playlist={playlist} token={token} />
+      <Search setPlaylist={setPlaylist} playlist={playlist} />
       <button onClick={createPlaylist}>Create Playlist</button>
     </>
   );

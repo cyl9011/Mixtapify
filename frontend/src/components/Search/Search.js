@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import styles from "./Search.module.css";
 import { fromMS } from "../../lib/helpers";
+import AuthContext from "../../lib/AuthContext";
 
-function Search({ token, playlist, setPlaylist }) {
+function Search({ playlist, setPlaylist }) {
+  const { token, setToken } = useContext(AuthContext);
   const [q, setQ] = useState("");
   const [res, setRes] = useState([]);
   const base = "https://api.spotify.com/v1/search";

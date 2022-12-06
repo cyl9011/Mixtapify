@@ -108,7 +108,7 @@ app.get("/auth/callback", function (req, res) {
     request.post(authOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
         access_token = body.access_token;
-        res.redirect(frontend_base);
+        res.redirect(`${frontend_base}/#/build`);
       } else {
         res.send("There was an error during authentication.");
       }
