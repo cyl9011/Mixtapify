@@ -6,7 +6,9 @@ Mixtapify allows users to create, decorate, and send mixtapes powered by Spotify
 
 ## Deliverables
 
-- [ ] One-page Proposal | 11/30
+- [X] One-page Proposal | 11/30
+
+- [X] Professor Meeting (NSH 3513) | 12/5
 
 - [ ] Presentation | 12/8
 

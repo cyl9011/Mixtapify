@@ -1,0 +1,63 @@
+.bg-dark {
+  background-image: linear-gradient(#000000, #1a0f37);
+  color: white;
+}
+
+.me-auto {
+}
+
+.bg-dark h1 {
+  color: white;
+}
+
+.nav a {
+  color: white;
+}
+
+.bg-dark a {
+  color: white;
+}
+
+h1 {
+  color: white;
+}
+
+body {
+  color: white;
+}
+
+.welcome {
+  color: #ffffff;
+  padding: 50px;
+  font-size: 3rem;
+  font-style: bold;
+}
+
+#navbarContainer ul {
+  
+  padding: 1rem;
+
+  z-index: 10;
+  position: absolute;
+  top: 90px;
+  left: 20px;
+
+  list-style-type: none;
+}
+
+#navbarContainer li {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+#navbarContainer li a {
+  color: #4b917d;
+  font-style: bold;
+}
+
+.bg-dark li a {
+  text-decoration: none;
+  color: #4b917d;
+  text-decoration: bold;
+}
