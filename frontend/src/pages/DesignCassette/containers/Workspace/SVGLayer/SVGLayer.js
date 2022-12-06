@@ -390,6 +390,17 @@ const SVGLayer = () => {
     input.focus();
   }
 
+  function downloadSVGAsText() {
+    const svg = document.querySelector('.Workspace').querySelector("svg");
+    console.log(svg)
+    const base64doc = btoa(unescape(encodeURIComponent(svg.outerHTML)));
+    const a = document.createElement('a');
+    const e = new MouseEvent('click');
+    a.download = 'download.svg';
+    a.href = 'data:image/svg+xml;base64,' + base64doc;
+    a.dispatchEvent(e);
+  }
+
   return (
     <>
       <svg
@@ -460,6 +471,7 @@ const SVGLayer = () => {
         </text>
       </svg>
       <img src={currCassette} width="500" height="350" />
+      <button onClick={(e) => downloadSVGAsText(e)}>NEXT STEP</button>
     </>
   );
 };
