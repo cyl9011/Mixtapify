@@ -9,7 +9,7 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
-import appRoutes from "../../shared/appRoutes";
+import appRoutes from "../../lib/appRoutes";
 
 import "./Footer.css";
 
@@ -18,11 +18,7 @@ const Footer = () => {
 
   const toggle = () => setIsOpen(!isOpen);
 
-  return (
-    <div>
-
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Footer;

@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-import { Route, Routes, Router, Navigate } from "react-router-dom";
-import appRoutes from "./shared/appRoutes";
+import { Route, Routes } from "react-router-dom";
+import appRoutes from "./lib/appRoutes";
 
 import NavBar from "./containers/NavBar/NavBar";
 import Home from "./containers/Home/Home";
@@ -9,13 +9,11 @@ import Footer from "./containers/Footer/Footer";
 import Sender from "./containers/Sender/Sender";
 import Recipient from "./containers/Recipient/Recipient";
 import Title from "./containers/Title/Title";
-import Decorate from "./containers/Decorate/Decorate";
 import Choose from "./containers/Choose/Choose";
 import Cassette from "./containers/Cassette/Cassette";
 import NotImplemented from "./containers/NotImplemented/NotImplemented";
-import DesignCassette from "./pages/DesignCassette";
-import Login from "./components/Login/Login";
-import Build from "./pages/Build/Build";
+import DesignCassette from "./containers/DesignCassette";
+import Build from "./containers/Build/Build";
 import AuthContext from "./lib/AuthContext";
 import { refreshToken } from "./lib/helpers";
 
@@ -60,17 +58,24 @@ const App = () => {
         <div className="MainContent">
           <NavBar />
           <Routes>
-            <Route path={appRoutes.home} element={<Home />} />
-            <Route path={appRoutes.sender} element={<Sender />} />
-            <Route path={appRoutes.recipient} element={<Recipient />} />
-            <Route path={appRoutes.title} element={<Title />} />
-            <Route path={appRoutes.decorate} element={<DesignCassette />} />
-            <Route path={appRoutes.choose} element={<Choose />} />
-            <Route path={appRoutes.cassette} element={<Cassette />} />
-            <Route exact path={appRoutes.build} element={<Build />} />
-            <Route exact path={appRoutes.playlist} element={<Playlist />} />
+            <Route path={appRoutes.home.route} element={<Home />} />
+            <Route path={appRoutes.sender.route} element={<Sender />} />
+            <Route path={appRoutes.recipient.route} element={<Recipient />} />
+            <Route path={appRoutes.title.route} element={<Title />} />
             <Route
-              path={appRoutes.notImplemented}
+              path={appRoutes.decorate.route}
+              element={<DesignCassette />}
+            />
+            <Route path={appRoutes.choose.route} element={<Choose />} />
+            <Route path={appRoutes.cassette.route} element={<Cassette />} />
+            <Route exact path={appRoutes.build.route} element={<Build />} />
+            <Route
+              exact
+              path={appRoutes.playlist.route}
+              element={<Playlist />}
+            />
+            <Route
+              path={appRoutes.notImplemented.route}
               element={<NotImplemented />}
             />
           </Routes>
