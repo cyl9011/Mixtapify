@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import appRoutes from "./lib/appRoutes";
 
-import NavBar from "./components/NavBar/NavBar";
 import Home from "./pages/Home/Home";
 import Footer from "./pages/Footer/Footer";
 import Sender from "./pages/Sender/Sender";
@@ -55,7 +54,6 @@ const App = () => {
     <div className="App">
       <AuthContext.Provider value={{ token, setToken }}>
         <div className="MainContent">
-          <NavBar />
           <Container>
             <Routes>
               <Route path={appRoutes.home.route} element={<Home />} />

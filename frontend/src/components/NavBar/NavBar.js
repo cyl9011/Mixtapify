@@ -9,27 +9,25 @@ const NavBar = () => {
   return (
     <div id="nav">
       <div id="navbarContainer">
-        <div className="bg-dark" color="bg-dark" expand="md">
-          <Nav className="me-auto" navbar>
-            {Object.values(appRoutes)
-              .filter(
-                (page) =>
-                  !(
-                    page.route.includes(":") ||
-                    page.route.includes("not-implemented")
-                  )
-              )
-              .map((page) => {
-                return (
-                  <NavItem>
-                    <NavLink tag={RouterNavLink} to={page.route}>
-                      {page.page}
-                    </NavLink>
-                  </NavItem>
-                );
-              })}
-          </Nav>
-        </div>
+        <Nav className="me-auto" navbar>
+          {Object.values(appRoutes)
+            .filter(
+              (page) =>
+                !(
+                  page.route.includes(":") ||
+                  page.route.includes("not-implemented")
+                )
+            )
+            .map((page) => {
+              return (
+                <NavItem>
+                  <NavLink tag={RouterNavLink} to={page.route}>
+                    {page.page}
+                  </NavLink>
+                </NavItem>
+              );
+            })}
+        </Nav>
       </div>
     </div>
   );
