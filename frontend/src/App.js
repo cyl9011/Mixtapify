@@ -55,7 +55,6 @@ const App = () => {
     <div className="App">
       <AuthContext.Provider value={{ token, setToken }}>
         <div className="MainContent">
-          <NavBar />
           <Container>
             <Routes>
               <Route path={appRoutes.home.route} element={<Home />} />
