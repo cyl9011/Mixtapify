@@ -10,13 +10,23 @@
 
   width: 800px;
   height: 700px;
+
+  display: flex;
+  justify-content: center;
+}
+
+#workspace-svg {
+  z-index: 1;
 }
 
 #workspace-canvas,
-#workspace-svg {
+#workspace-svg,
+#cassette img {
   position: absolute;
   top: 0px;
   left: 0px;
 }
 
-
+#cassette {
+  display: flex;
+}

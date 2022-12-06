@@ -391,7 +391,12 @@ const SVGLayer = () => {
   }
 
   return (
-    <>
+    <div
+      id="cassette"
+      onClick={() => {
+        console.log(document.getElementById("cassette").outerHTML);
+      }}
+    >
       <svg
         id="workspace-svg"
         width="500"
@@ -459,8 +464,13 @@ const SVGLayer = () => {
           Name
         </text>
       </svg>
-      <img src={currCassette} width="500" height="350" />
-    </>
+      <img
+        src={currCassette}
+        alt="cassette background"
+        width="500"
+        height="350"
+      />
+    </div>
   );
 };
 

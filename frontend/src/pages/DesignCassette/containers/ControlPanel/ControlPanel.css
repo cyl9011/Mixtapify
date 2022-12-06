@@ -11,6 +11,8 @@
   height: 700px;
 
   user-select: none;
+
+  overflow: auto;
 }
 
 .ControlPanel .Control {
@@ -26,6 +28,8 @@
 .Control h3 {
   margin-top: 15px;
   margin-bottom: 15px;
+  color: black;
+  font-size: 0.5em;
 }
 
 .ControlPanel .Control label {
