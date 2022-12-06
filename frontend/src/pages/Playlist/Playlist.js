@@ -3,10 +3,11 @@ import { useParams } from "react-router";
 
 import AuthContext from "../../lib/AuthContext";
 import Tracks from "../../components/Tracks/Tracks";
+import Cassette from "../../components/Cassette/Cassette";
 
 function Playlist() {
   const { id } = useParams();
-  const [tracks, setTracks] = useState([]);
+  const [data, setData] = useState(undefined);
   const [link, setLink] = useState("");
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function Playlist() {
     .then((res) => {
       return res.json();
     })
-    .then((data) => setTracks(data ? data.tracks : []));
+    .then((data) => setData(data));
 
   const { token, setToken } = useContext(AuthContext);
 
@@ -33,7 +34,8 @@ function Playlist() {
 
   return (
     <>
-      <Tracks tracks={tracks} />
+      <Cassette cassetteStr={data?.cassette} />
+      <Tracks tracks={data?.tracks ?? []} />
       <button className="btn" onClick={copyToClip}>
         Copy Mixtape Link
       </button>

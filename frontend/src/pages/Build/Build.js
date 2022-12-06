@@ -6,6 +6,7 @@ import AuthContext from "../../lib/AuthContext";
 import Search from "../../components/Search/Search";
 import Tracks from "../../components/Tracks/Tracks";
 import styles from "./Build.module.css";
+import Cassette from "../../components/Cassette/Cassette";
 
 function Build() {
   const [playlist, setPlaylist] = useState([]);
@@ -48,10 +49,7 @@ function Build() {
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.cassette}
-        dangerouslySetInnerHTML={{ __html: mixtape.cassette }}
-      ></div>
+      <Cassette cassetteStr={mixtape?.cassette} />
       <div className={styles.curPlaylist}>
         {playlist.length > 0 ? (
           <Tracks tracks={playlist} deleteTrack={deleteTrack} />
