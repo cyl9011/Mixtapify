@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import cn from "classnames";
 
 import AuthContext from "../../lib/AuthContext";
 import Search from "../../components/Search/Search";
 import Tracks from "../../components/Tracks/Tracks";
+import styles from "./Build.module.css";
 
 function Build() {
   const [playlist, setPlaylist] = useState([]);
@@ -45,12 +47,26 @@ function Build() {
   };
 
   return (
-    <>
-      <div dangerouslySetInnerHTML={{ __html: mixtape.cassette }}></div>
-      <Tracks tracks={playlist} deleteTrack={deleteTrack} />
+    <div className={styles.container}>
+      <div
+        className={styles.cassette}
+        dangerouslySetInnerHTML={{ __html: mixtape.cassette }}
+      ></div>
+      <div className={styles.curPlaylist}>
+        {playlist.length > 0 ? (
+          <Tracks tracks={playlist} deleteTrack={deleteTrack} />
+        ) : (
+          <p>
+            You currently do not have any songs in your playlist. Begin by
+            searching for a song.
+          </p>
+        )}
+      </div>
       <Search setPlaylist={setPlaylist} playlist={playlist} />
-      <button onClick={createPlaylist}>Create Playlist</button>
-    </>
+      <button className={cn(styles.create, "btn")} onClick={createPlaylist}>
+        Create Playlist
+      </button>
+    </div>
   );
 }
 

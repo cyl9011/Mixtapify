@@ -45,6 +45,8 @@ const playlistSchema = new mongoose.Schema({
   from: String,
   to: String,
   tracks: [trackSchema],
+  title: String,
+  cassette: String,
   date: Date,
 });
 const Playlist = mongoose.model("Playlist", playlistSchema);

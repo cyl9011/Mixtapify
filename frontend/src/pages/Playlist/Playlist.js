@@ -34,7 +34,9 @@ function Playlist() {
   return (
     <>
       <Tracks tracks={tracks} />
-      <button onClick={copyToClip}>Copy Mixtape Link</button>
+      <button className="btn" onClick={copyToClip}>
+        Copy Mixtape Link
+      </button>
     </>
   );
 }

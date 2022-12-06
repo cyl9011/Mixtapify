@@ -1,0 +1,16 @@
+.cassette {
+  position: relative;
+  height: 350px;
+  width: 500px;
+  margin-bottom: 2vh;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.create {
+  margin: 2vh 0;
+}
