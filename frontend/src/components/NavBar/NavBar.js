@@ -12,7 +12,13 @@ const NavBar = () => {
         <div className="bg-dark" color="bg-dark" expand="md">
           <Nav className="me-auto" navbar>
             {Object.values(appRoutes)
-              .filter((page) => !page.route.includes(":"))
+              .filter(
+                (page) =>
+                  !(
+                    page.route.includes(":") ||
+                    page.route.includes("not-implemented")
+                  )
+              )
               .map((page) => {
                 return (
                   <NavItem>

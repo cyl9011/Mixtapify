@@ -43,3 +43,9 @@ export const extractTrackInfo = (tracks) => {
     };
   });
 };
+
+export const camelize = (str) => {
+  return str.replace(/-([a-z])/g, function (g) {
+    return g[1].toUpperCase();
+  });
+};

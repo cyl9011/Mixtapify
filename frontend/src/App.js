@@ -9,8 +9,6 @@ import Footer from "./pages/Footer/Footer";
 import Sender from "./pages/Sender/Sender";
 import Recipient from "./pages/Recipient/Recipient";
 import Title from "./pages/Title/Title";
-import Choose from "./pages/Choose/Choose";
-import Cassette from "./pages/Cassette/Cassette";
 import NotImplemented from "./pages/NotImplemented/NotImplemented";
 import DesignCassette from "./pages/DesignCassette";
 import Build from "./pages/Build/Build";
@@ -19,6 +17,7 @@ import { refreshToken } from "./lib/helpers";
 
 import "./App.css";
 import Playlist from "./pages/Playlist/Playlist";
+import Container from "./components/Container/Container";
 
 let globalItems = 0;
 
@@ -57,28 +56,28 @@ const App = () => {
       <AuthContext.Provider value={{ token, setToken }}>
         <div className="MainContent">
           <NavBar />
-          <Routes>
-            <Route path={appRoutes.home.route} element={<Home />} />
-            <Route path={appRoutes.sender.route} element={<Sender />} />
-            <Route path={appRoutes.recipient.route} element={<Recipient />} />
-            <Route path={appRoutes.title.route} element={<Title />} />
-            <Route
-              path={appRoutes.decorate.route}
-              element={<DesignCassette />}
-            />
-            <Route path={appRoutes.choose.route} element={<Choose />} />
-            <Route path={appRoutes.cassette.route} element={<Cassette />} />
-            <Route exact path={appRoutes.build.route} element={<Build />} />
-            <Route
-              exact
-              path={appRoutes.playlist.route}
-              element={<Playlist />}
-            />
-            <Route
-              path={appRoutes.notImplemented.route}
-              element={<NotImplemented />}
-            />
-          </Routes>
+          <Container>
+            <Routes>
+              <Route path={appRoutes.home.route} element={<Home />} />
+              <Route path={appRoutes.sender.route} element={<Sender />} />
+              <Route path={appRoutes.recipient.route} element={<Recipient />} />
+              <Route path={appRoutes.title.route} element={<Title />} />
+              <Route
+                path={appRoutes.decorate.route}
+                element={<DesignCassette />}
+              />
+              <Route exact path={appRoutes.build.route} element={<Build />} />
+              <Route
+                exact
+                path={appRoutes.playlist.route}
+                element={<Playlist />}
+              />
+              <Route
+                path={appRoutes.notImplemented.route}
+                element={<NotImplemented />}
+              />
+            </Routes>
+          </Container>
         </div>
         <Footer />
       </AuthContext.Provider>
