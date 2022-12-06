@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Search from "../../components/Search/Search";
+import Tracks from "../../components/Tracks/Tracks";
 
 function Build() {
   const [playlist, setPlaylist] = useState([]);
@@ -32,8 +33,16 @@ function Build() {
       })
       .then((data) => navigate(`/playlist/${data?._id}`));
   };
+
+  const deleteTrack = (index) => {
+    const playlistCopy = [...playlist];
+    playlistCopy.splice(index, 1);
+    setPlaylist(playlistCopy);
+  };
+
   return (
     <>
+      <Tracks tracks={playlist} deleteTrack={deleteTrack} />
       <Search setPlaylist={setPlaylist} playlist={playlist} />
       <button onClick={createPlaylist}>Create Playlist</button>
     </>

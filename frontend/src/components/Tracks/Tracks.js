@@ -1,7 +1,7 @@
 import styles from "./Tracks.module.css";
 import { fromMS, idFn } from "../../lib/helpers";
 
-function Tracks({ tracks, addToPlaylist }) {
+function Tracks({ tracks, addToPlaylist, deleteTrack }) {
   return tracks?.map((track, index) => {
     const { image, duration_ms, name, album, artists } = track;
     const key = `${name} option ${index}`;
@@ -15,12 +15,21 @@ function Tracks({ tracks, addToPlaylist }) {
         key={key}
         name={name}
         onClick={addToPlaylist ? () => addToPlaylist(track) : idFn}
+        deleteTrack={deleteTrack ? () => deleteTrack(index) : undefined}
       />
     );
   });
 }
 
-function Track({ image, artists, name, album, duration_ms, onClick = idFn }) {
+function Track({
+  image,
+  artists,
+  name,
+  album,
+  duration_ms,
+  onClick = idFn,
+  deleteTrack,
+}) {
   return (
     <div className={styles.track} onClick={onClick}>
       <img src={image} alt={`${name} by ${artists} album cover`} width={50} />
@@ -30,6 +39,7 @@ function Track({ image, artists, name, album, duration_ms, onClick = idFn }) {
       </div>
       <p>{album}</p>
       <p>{fromMS(duration_ms)}</p>
+      {deleteTrack && <button onClick={deleteTrack}>delete</button>}
     </div>
   );
 }

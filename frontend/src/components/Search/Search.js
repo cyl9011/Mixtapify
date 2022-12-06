@@ -43,7 +43,6 @@ function Search({ playlist, setPlaylist }) {
 
   return (
     <div>
-      <Tracks tracks={playlist} />
       <label htmlFor="track">Search</label>
       <input
         id="track"
