@@ -127,8 +127,8 @@ app.post("/api/create", (req, res) => {
   Playlist.create({
     ...req.body,
     date: Date.now(),
-  }).then((posts) => {
-    console.log("posts created!", posts);
+  }).then((playlist) => {
+    console.log("playlist created!", playlist);
     res.redirect(`${frontend_base}/`);
   });
 });
@@ -139,7 +139,6 @@ app.get("/api/playlist/:id", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(foundUser);
       res.json(foundUser);
     }
   });
