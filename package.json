@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-hook-form": "^7.40.0",
+    "react-router-dom": "^6.4.4"
+  }
+}
