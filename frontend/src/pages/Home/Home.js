@@ -1,10 +1,13 @@
 import React from "react";
+import Login from "../../components/Login/Login";
+
 import "./Home.css";
 
 const Home = () => {
   return (
     <div className="home">
-        <div>Welcome to Mixtapify</div>
+      <h1>Welcome to Mixtapify</h1>
+      <Login />
     </div>
   );
 };

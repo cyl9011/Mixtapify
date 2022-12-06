@@ -11,15 +11,17 @@ const NavBar = () => {
       <div id="navbarContainer">
         <div className="bg-dark" color="bg-dark" expand="md">
           <Nav className="me-auto" navbar>
-            {Object.values(appRoutes).map((page) => {
-              return (
-                <NavItem>
-                  <NavLink tag={RouterNavLink} to={page.route}>
-                    {page.page}
-                  </NavLink>
-                </NavItem>
-              );
-            })}
+            {Object.values(appRoutes)
+              .filter((page) => !page.route.includes(":"))
+              .map((page) => {
+                return (
+                  <NavItem>
+                    <NavLink tag={RouterNavLink} to={page.route}>
+                      {page.page}
+                    </NavLink>
+                  </NavItem>
+                );
+              })}
           </Nav>
         </div>
       </div>

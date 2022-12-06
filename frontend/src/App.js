@@ -3,17 +3,17 @@ import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import appRoutes from "./lib/appRoutes";
 
-import NavBar from "./containers/NavBar/NavBar";
-import Home from "./containers/Home/Home";
-import Footer from "./containers/Footer/Footer";
-import Sender from "./containers/Sender/Sender";
-import Recipient from "./containers/Recipient/Recipient";
-import Title from "./containers/Title/Title";
-import Choose from "./containers/Choose/Choose";
-import Cassette from "./containers/Cassette/Cassette";
-import NotImplemented from "./containers/NotImplemented/NotImplemented";
-import DesignCassette from "./containers/DesignCassette";
-import Build from "./containers/Build/Build";
+import NavBar from "./pages/NavBar/NavBar";
+import Home from "./pages/Home/Home";
+import Footer from "./pages/Footer/Footer";
+import Sender from "./pages/Sender/Sender";
+import Recipient from "./pages/Recipient/Recipient";
+import Title from "./pages/Title/Title";
+import Choose from "./pages/Choose/Choose";
+import Cassette from "./pages/Cassette/Cassette";
+import NotImplemented from "./pages/NotImplemented/NotImplemented";
+import DesignCassette from "./pages/DesignCassette";
+import Build from "./pages/Build/Build";
 import AuthContext from "./lib/AuthContext";
 import { refreshToken } from "./lib/helpers";
 
