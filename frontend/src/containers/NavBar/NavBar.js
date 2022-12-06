@@ -11,8 +11,6 @@ import {
 } from "reactstrap";
 import appRoutes from "../../shared/appRoutes";
 
-import logo from "../../assets/images/logo.png";
-import cart from "../../assets/images/cart.png";
 import "./NavBar.css";
 
 const NavBar = () => {
@@ -21,45 +19,46 @@ const NavBar = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
-      <div id="redBlock"></div>
+    <div id="nav">
       <div id="navbarContainer">
-        <Navbar color="dark" expand="md">
+        <Navbar className="bg-dark" color="bg-dark" expand="md">
           <NavbarBrand tag={RouterNavLink} to={appRoutes.home}>
-            <img src={logo} alt="logo" />
-            <h1>Scotty Shirts U Illustrate (SSUI)</h1>
-
+            <div className="welcome">Welcome to Mixtapify</div>
           </NavbarBrand>
-          <div id="shoppingCartContainer">
-              <NavLink tag={RouterNavLink} to={appRoutes.cart}>
-                <img src={cart} alt="cart" />
-              </NavLink>
-              <div id="cartQuantity"></div>
-            </div>
           <Nav className="me-auto" navbar>
             <NavItem>
-              <NavLink tag={RouterNavLink} to={appRoutes.product}>
-                T-SHIRTS
+              <NavLink tag={RouterNavLink} to={appRoutes.home}>
+                Home
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RouterNavLink} to={appRoutes.notImplemented}>
-                CREATE FROM PICTURE
+              <NavLink tag={RouterNavLink} to={appRoutes.sender}>
+                Sender
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RouterNavLink} to={appRoutes.notImplemented}>
-                CREATE YOUR OWN
+              <NavLink tag={RouterNavLink} to={appRoutes.recipient}>
+                Recipient
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RouterNavLink} to={appRoutes.notImplemented}>
-                ABOUT US
+              <NavLink tag={RouterNavLink} to={appRoutes.title}>
+                Title
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={RouterNavLink} to={appRoutes.notImplemented}>
-                LOG IN
+              <NavLink tag={RouterNavLink} to={appRoutes.decorate}>
+                Decorate
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={RouterNavLink} to={appRoutes.choose}>
+                Choose
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={RouterNavLink} to={appRoutes.cassette}>
+                Cassette
               </NavLink>
             </NavItem>
           </Nav>

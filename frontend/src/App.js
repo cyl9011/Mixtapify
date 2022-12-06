@@ -1,47 +1,62 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-//import Login from "./components/Login/Login";
-import Build from "./pages/Build/Build";
-import Home from "./pages/Home/Home";
-import Sender from "./pages/Sender/Sender";
-import Recipient from "./pages/Recipient/Recipient";
-import Choose from "./pages/Choose/Choose";
-import Decorate from "./pages/Decorate/Decorate";
-import Cassette from "./pages/Cassette/Cassette";
-
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes, Router, Navigate } from "react-router-dom";
 import appRoutes from "./shared/appRoutes";
+
+import NavBar from "./containers/NavBar/NavBar";
+import Home from "./containers/Home/Home";
+import Footer from "./containers/Footer/Footer";
+import Sender from "./containers/Sender/Sender";
+import Recipient from "./containers/Recipient/Recipient";
+import Title from "./containers/Title/Title";
+import Decorate from "./containers/Decorate/Decorate";
+import Choose from "./containers/Choose/Choose";
+import Cassette from "./containers/Cassette/Cassette";
+import Detail from "./containers/Detail/Detail";
+import NotImplemented from "./containers/NotImplemented/NotImplemented";
 
 import "./App.css";
 
+let globalItems = 0;
+
 const App = () => {
-  /*
-  const [token, setToken] = useState("");
+  // SSUI Lab 7
+  const [cartItems, setCartItems] = useState([]);
+  const [newShirt, setNewShirt] = useState();
 
-  useEffect(() => {
-    async function getToken() {
-      const response = await fetch("/auth/token");
-      const json = await response.json();
-      setToken(json.access_token);
-    }
+  function updateNewShirt(e) {
+    setNewShirt(e.target.value);
+  }
 
-    getToken();
-  }, []);
-*/
+  function createNewShirt() {
+    setCartItems([...cartItems, { text: newShirt, id: ++globalItems }]);
+  }
+
+  function deleteShirt(id) {
+    let tempCartItems = [...cartItems];
+    tempCartItems.splice(
+      tempCartItems.findIndex((d) => d.id === d), 1
+    );
+    setCartItems(tempCartItems);
+  }
+
   return (
     <div className="App">
       <div className="MainContent">
-        <div>Test</div>
+        <NavBar />
         <Routes>
           <Route path={appRoutes.home} element={<Home />} />
           <Route path={appRoutes.sender} element={<Sender />} />
           <Route path={appRoutes.recipient} element={<Recipient />} />
+          <Route path={appRoutes.title} element={<Title />} />
           <Route path={appRoutes.decorate} element={<Decorate />} />
           <Route path={appRoutes.choose} element={<Choose />} />
           <Route path={appRoutes.cassette} element={<Cassette />} />
-          <Route path={appRoutes.notImplemented} element={<Build />} />
+          <Route path={appRoutes.detail} element={<Detail/>} />
+          <Route path={appRoutes.notImplemented} element={<NotImplemented />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 };
