@@ -1,12 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "../../components/Login/Login";
 
 import "./Home.css";
 
 const Home = () => {
   return (
     <div className="home">
-      Welcome to Mixtapify
+      <h1>Welcome to Mixtapify</h1>
+      <Login />
     </div>
   );
 };
