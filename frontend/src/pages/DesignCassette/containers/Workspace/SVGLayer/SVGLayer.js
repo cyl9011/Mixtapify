@@ -203,7 +203,7 @@ const SVGLayer = () => {
   };
 
   useEffect(() => {
-    if(currMode == "text"){
+    if (currMode == "text") {
       handleText(FirstNameRef);
     }
   }, [currMode]);
@@ -368,7 +368,7 @@ const SVGLayer = () => {
         this.blur();
         return;
       }
-      ref.current.textContent = this.value;
+      ref.current.textContent = this.value == "" ? "Name" : this.value;
     };
     input.onblur = function (e) {
       myforeign.remove();
@@ -380,6 +380,8 @@ const SVGLayer = () => {
     );
     myforeign.setAttribute("width", "100%");
     myforeign.setAttribute("height", "100%");
+    myforeign.setAttribute("x", "200px");
+    myforeign.setAttribute("y", "80px");
     myforeign.append(input);
 
     const svg = ref.current.parentNode;
@@ -421,7 +423,7 @@ const SVGLayer = () => {
         <text
           x="200"
           y="40"
-          style={{ font: "bold italic 20px Lucida Handwriting", fill: currBorderColor }}
+          style={{ font: "bold italic 20px Lucida Handwriting" }}
         >
           To:
         </text>
@@ -430,14 +432,17 @@ const SVGLayer = () => {
           y="40"
           onClick={() => handleText(FirstNameRef)}
           ref={FirstNameRef}
-          style={{ font: "italic 20px Lucida Handwriting", fill: currBorderColor }}
+          style={{ font: "italic 20px Lucida Handwriting" }}
         >
           Name
         </text>
         <text
           x="200"
           y="60"
-          style={{ font: "bold italic 20px Lucida Handwriting", fill: currBorderColor }}
+          style={{
+            font: "bold italic 20px Lucida Handwriting",
+            fill: currBorderColor,
+          }}
         >
           From:
         </text>
@@ -446,7 +451,10 @@ const SVGLayer = () => {
           y="60"
           onClick={() => handleText(LastNameRef)}
           ref={LastNameRef}
-          style={{ font: "italic 20px Lucida Handwriting", fill: currBorderColor }}
+          style={{
+            font: "italic 20px Lucida Handwriting",
+            fill: currBorderColor,
+          }}
         >
           Name
         </text>
