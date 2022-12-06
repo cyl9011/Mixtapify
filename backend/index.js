@@ -128,18 +128,20 @@ app.post("/api/create", (req, res) => {
     ...req.body,
     date: Date.now(),
   }).then((playlist) => {
-    console.log("playlist created!", playlist);
-    res.redirect(`${frontend_base}/`);
+    console.log("playlist created!");
+    res.json(playlist);
   });
 });
 
 app.get("/api/playlist/:id", (req, res) => {
   const id = req.params.id;
+
   Playlist.findById(id, function (err, foundUser) {
     if (err) {
       console.log(err);
     } else {
-      res.json(foundUser);
+      console.log("hi", foundUser);
+      res.redirect(`${frontend_base}/#/playlist/`);
     }
   });
 });

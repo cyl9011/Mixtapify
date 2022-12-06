@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route exact path="/build" element={<Build />} />
-          {/* <Route exact path="/playlist/:id" element={<Build />} /> */}
+          <Route exact path="/playlist/:id" element={<Build />} />
         </Routes>
       </AuthContext.Provider>
     </div>

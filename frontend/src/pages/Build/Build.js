@@ -32,7 +32,11 @@ function Build() {
         tracks,
         date: Date.now(),
       }),
-    });
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => console.log(data));
   };
   return (
     <>

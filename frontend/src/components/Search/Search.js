@@ -76,7 +76,13 @@ function Search({ playlist, setPlaylist }) {
     <div>
       {displayTracks(playlist)}
       <label htmlFor="track">Search</label>
-      <input id="track" type="text" onChange={handleChange} value={q} />
+      <input
+        id="track"
+        type="text"
+        onChange={handleChange}
+        value={q}
+        autoComplete={false}
+      />
 
       <button onClick={handleSubmit} disabled={q === ""}>
         Submit
