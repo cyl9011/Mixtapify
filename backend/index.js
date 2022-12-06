@@ -134,13 +134,13 @@ app.post("/api/create", (req, res) => {
 });
 
 app.get("/api/playlist/:id", (req, res) => {
-  // console.log("body", req.id);
-  console.log(req);
-  // Playlist.findById(req.user.id, function (err, foundUser) {
-  //   if (err) {
-  //     console.log(err);
-  //   } else {
-  //     console.log(foundUser);
-  //   }
-  // });
+  const id = req.params.id;
+  Playlist.findById(id, function (err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(foundUser);
+      res.json(foundUser);
+    }
+  });
 });
