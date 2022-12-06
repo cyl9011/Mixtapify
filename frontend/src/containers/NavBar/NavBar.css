@@ -4,6 +4,10 @@
 }
 
 .me-auto {
+  background-color: black;
+  background-image: black;
+  height: 100%;
+  z-index: 1;
 }
 
 .bg-dark h1 {
@@ -34,30 +38,27 @@ body {
 }
 
 #navbarContainer ul {
-  
-  padding: 1rem;
-
   z-index: 10;
   position: absolute;
-  top: 90px;
-  left: 20px;
-
+  margin: 0;
+  top: 0px;
   list-style-type: none;
+  padding-right: 30px;
 }
 
 #navbarContainer li {
-  padding: 10px;
   text-decoration: none;
   color: white;
+  padding: 30px;
 }
 
 #navbarContainer li a {
-  color: #4b917d;
+  color: #ffffff;
   font-style: bold;
 }
 
 .bg-dark li a {
   text-decoration: none;
-  color: #4b917d;
+  color: #ffffff;
   text-decoration: bold;
 }
