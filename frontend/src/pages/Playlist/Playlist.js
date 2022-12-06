@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router";
 
 import AuthContext from "../../lib/AuthContext";
@@ -7,6 +7,11 @@ import Tracks from "../../components/Tracks/Tracks";
 function Playlist() {
   const { id } = useParams();
   const [tracks, setTracks] = useState([]);
+  const [link, setLink] = useState("");
+
+  useEffect(() => {
+    setLink(window.location.href);
+  }, []);
 
   fetch(`/api/playlist/${id}`, {
     method: "GET",
@@ -21,7 +26,17 @@ function Playlist() {
 
   const { token, setToken } = useContext(AuthContext);
 
-  return <Tracks tracks={tracks} />;
+  async function copyToClip() {
+    await navigator.clipboard.writeText(link);
+    alert("link copied!");
+  }
+
+  return (
+    <>
+      <Tracks tracks={tracks} />
+      <button onClick={copyToClip}>Copy Mixtape Link</button>
+    </>
+  );
 }
 
 export default Playlist;
