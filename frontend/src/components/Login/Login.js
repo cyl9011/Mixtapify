@@ -4,7 +4,7 @@ import cn from "classnames";
 
 function Login() {
   return (
-    <a class={cn(styles.login, "btn")} href="/auth/login">
+    <a className={cn(styles.login, "btn")} href="/auth/login">
       Login with Spotify
     </a>
   );
