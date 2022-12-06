@@ -22,6 +22,9 @@ let globalItems = 0;
 
 const App = () => {
   const [token, setToken] = useState("");
+  const [mixtape, setMixtape] = useState({
+    date: Date.now(),
+  });
 
   useEffect(() => {
     const getToken = refreshToken(setToken);
@@ -31,7 +34,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ token, setToken }}>
+      <AuthContext.Provider value={{ token, setToken, mixtape, setMixtape }}>
         <div className="MainContent">
           <Container>
             <Routes>
