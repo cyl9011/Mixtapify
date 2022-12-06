@@ -1,0 +1,20 @@
+#notImplementedContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    opacity: 30%;
+}
+
+#notImplementedContainer h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+#notImplementedContainer img {
+    width: 50%;
+    height: 50%;
+}
