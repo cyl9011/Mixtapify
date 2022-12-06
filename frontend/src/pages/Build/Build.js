@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Search from "../../components/Search/Search";
 
 function Build() {
   const [playlist, setPlaylist] = useState([]);
+  const navigate = useNavigate();
 
   const createPlaylist = () => {
     const tracks = playlist.map((track) => {
@@ -21,7 +24,7 @@ function Build() {
       };
     });
     console.log("tracks", tracks);
-    fetch(`http://localhost:3001/api/create`, {
+    fetch(`/api/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +39,7 @@ function Build() {
       .then((res) => {
         return res.json();
       })
-      .then((data) => console.log(data));
+      .then((data) => navigate(`/playlist/${data?._id}`));
   };
   return (
     <>

@@ -6,6 +6,7 @@ import Build from "./pages/Build/Build";
 import AuthContext from "./lib/AuthContext";
 import { refreshToken } from "./lib/helpers";
 import "./App.css";
+import Playlist from "./pages/Playlist/Playlist";
 
 function App() {
   const [token, setToken] = useState("");
@@ -22,7 +23,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route exact path="/build" element={<Build />} />
-          <Route exact path="/playlist/:id" element={<Build />} />
+          <Route exact path="/playlist/:id" element={<Playlist />} />
         </Routes>
       </AuthContext.Provider>
     </div>
