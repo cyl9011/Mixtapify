@@ -23,8 +23,10 @@ const Sender = () => {
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
-        if (json && !json.error)
+        if (json && !json.error) {
           setName(json?.display_name ? json.display_name : "");
+          setMixtape({ ...mixtape, id: json?.id });
+        }
       });
   }, [token]);
 
