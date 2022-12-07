@@ -8,9 +8,7 @@
   margin-bottom: 2vh;
 }
 
-.cassette svg,
-.cassette img {
+#workspace-svg,
+#cassette img {
   position: absolute;
-  top: 0% !important;
-  left: 0% !important;
 }

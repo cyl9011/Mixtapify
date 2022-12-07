@@ -6,6 +6,7 @@ const Cassette = ({ cassetteStr }) => {
   return (
     <div
       className={styles.cassette}
+      style={{ top: "0%", left: "0%" }}
       dangerouslySetInnerHTML={{ __html: cassetteStr }}
     ></div>
   );
