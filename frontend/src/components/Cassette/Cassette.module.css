@@ -7,3 +7,8 @@
 
   margin-bottom: 2vh;
 }
+
+#workspace-svg,
+#cassette img {
+  position: absolute;
+}

@@ -51,7 +51,6 @@ function Build() {
     <div className={styles.container}>
       <Cassette
         cassetteStr={mixtape?.cassette}
-        style={{ top: "0%", left: "0%" }}
       />
       <div className={styles.curPlaylist}>
         {playlist.length > 0 ? (

@@ -8,3 +8,9 @@
 .create {
   margin: 2vh 0;
 }
+
+#workspace-svg,
+#cassette img {
+  position: absolute;
+}
+

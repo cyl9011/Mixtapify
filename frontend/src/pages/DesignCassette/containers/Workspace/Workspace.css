@@ -17,12 +17,18 @@
   z-index: 1;
 }
 
+
+
 #workspace-canvas,
+.Workspace #workspace-svg,
+.Workspace #cassette img {
+  top: 25%;
+  left: 8%;
+}
+
 #workspace-svg,
 #cassette img {
   position: absolute;
-  top: 25%;
-  left: 8%;
 }
 
 #cassette {
