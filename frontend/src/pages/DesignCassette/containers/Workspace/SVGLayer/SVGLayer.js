@@ -382,8 +382,8 @@ const SVGLayer = () => {
     );
     myforeign.setAttribute("width", "100%");
     myforeign.setAttribute("height", "100%");
-    myforeign.setAttribute("x", "200px");
-    myforeign.setAttribute("y", "80px");
+    myforeign.setAttribute("x", "100px");
+    myforeign.setAttribute("y", "50px");
     myforeign.append(input);
 
     const svg = ref.current.parentNode;
@@ -443,7 +443,6 @@ const SVGLayer = () => {
           y="72"
           style={{
             font: "bold italic 20px Lucida Handwriting",
-            fill: currBorderColor,
           }}
         >
           From:
@@ -455,7 +454,6 @@ const SVGLayer = () => {
           ref={LastNameRef}
           style={{
             font: "italic 20px Lucida Handwriting",
-            fill: currBorderColor,
           }}
         >
           {from}
@@ -466,6 +464,8 @@ const SVGLayer = () => {
         alt="cassette background"
         width="500"
         height="350"
+        top="50%"
+        left="50%"
       />
     </div>
   );

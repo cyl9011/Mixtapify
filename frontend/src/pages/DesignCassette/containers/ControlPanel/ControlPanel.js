@@ -33,7 +33,8 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   stickerSelect: {
-    width: "100px",
+    width: "120px",
+    height: "50px",
   },
 }));
 
@@ -107,6 +108,8 @@ const Modes = ({
   addShape,
   changeCurrSticker,
   currStickerSize,
+  currFillColor,
+  currBorderColor,
 }) => {
   const classes = useStyles();
   const handleStickerChange = (e) => {
@@ -173,7 +176,7 @@ const Modes = ({
         >
           <img src={TextImg} alt="text" />
         </div>
-        {/* <div
+        <div
           className={["Mode", currMode === "line" ? "Active" : null].join(" ")}
           onClick={() => changeCurrMode("line")}
         >
@@ -207,7 +210,7 @@ const Modes = ({
               borderRadius: "50%",
             }}
           ></div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
@@ -237,6 +240,8 @@ const ColorPicker = ({ title, currColor, setCurrColor, conflictColors }) => {
             <div
               className="ColorBlock"
               style={{
+                fontSize: "medium",
+                color: "black",
                 backgroundColor: color,
                 border: color === "transparent" ? "none" : null,
                 opacity:
@@ -443,11 +448,11 @@ const ControlPanel = () => {
         changeStickerSize={changeStickerSize}
         changeCurrStickerSize={changeCurrStickerSize}
       />
-      {/* <FillColor
+      <FillColor
         currFillColor={currFillColor}
         changeCurrFillColor={changeCurrFillColor}
         currBorderColor={currBorderColor}
-      />  */}
+      />
       <Delete targetShapeId={targetShapeId} deleteShape={deleteShape} />
       <UndoRedo
         undo={undo}

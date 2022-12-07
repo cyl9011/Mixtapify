@@ -21,8 +21,8 @@
 #workspace-svg,
 #cassette img {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 25%;
+  left: 8%;
 }
 
 #cassette {
