@@ -89,7 +89,7 @@ function Playlist() {
       </h3>
       <Cassette cassetteStr={data?.cassette} />
       <Player playlistID={id} tracks={data?.tracks} />
-      <Tracks tracks={data?.tracks ?? []} />
+      <Tracks tracks={data?.tracks ?? []}/>
       <button className="btn" onClick={copyToClip}>
         Copy Mixtape Link
       </button>

@@ -6,7 +6,7 @@ function Tracks({ tracks, addToPlaylist, deleteTrack }) {
   return (
     <div
       className={tracks?.length > 0 ? styles.container : ""}
-      style={{ height: deleteTrack ? "auto" : "50vh" }}
+      style={{ height: "auto"}}
     >
       {tracks?.map((track, index) => {
         const { image, duration_ms, name, album, artists } = track;
