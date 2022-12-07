@@ -83,6 +83,10 @@ function Playlist() {
 
   return (
     <div>
+      <h2>{data?.title}</h2>
+      <h3>
+        From {data?.from} to {data?.to}
+      </h3>
       <Cassette cassetteStr={data?.cassette} />
       <Player playlistID={id} tracks={data?.tracks} />
       <Tracks tracks={data?.tracks ?? []} />

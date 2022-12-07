@@ -12,7 +12,7 @@ function Player({ playlistID, tracks }) {
   const [player, setPlayer] = useState(undefined);
   const [currentTrack, setCurrentTrack] = useState(0);
 
-  console.log(playlistID);
+  console.log("tracks", tracks);
 
   const play = ({
     uris,
@@ -74,7 +74,7 @@ function Player({ playlistID, tracks }) {
       console.log("player", player);
       setPlayer(player);
     }
-  }, [token]);
+  }, [token, tracks]);
 
   return (
     <div className={styles.container}>

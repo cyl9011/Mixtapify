@@ -32,7 +32,12 @@ const generateRandomString = (length) => {
 
 const stateKey = "spotify_auth_state";
 
-mongoose.connect("mongodb://localhost:27017/mixtapes");
+mongoose.connect(
+  process.env.DB_PW
+    ? `mongodb+srv://admin-michelle:${process.env.DB_PW}@cluster0.07bud.mongodb.net/mixtapes`
+    : "mongodb://localhost:27017/mixtapes"
+);
+
 const trackSchema = new mongoose.Schema({
   id: String,
   name: String,
