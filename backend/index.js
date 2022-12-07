@@ -17,6 +17,8 @@ const redirect_uri =
   process.env.REDIRECT_URI || `http://localhost:${PORT}/auth/callback`;
 const frontend_base = process.env.FRONTEND_BASE || `http://localhost:3000`;
 
+let playlist_id = undefined;
+
 const generateRandomString = (length) => {
   let text = "";
   const possible =
@@ -30,7 +32,12 @@ const generateRandomString = (length) => {
 
 const stateKey = "spotify_auth_state";
 
-mongoose.connect("mongodb://localhost:27017/mixtapes");
+mongoose.connect(
+  process.env.DB_PW
+    ? `mongodb+srv://admin-michelle:${process.env.DB_PW}@cluster0.07bud.mongodb.net/mixtapes`
+    : "mongodb://localhost:27017/mixtapes"
+);
+
 const trackSchema = new mongoose.Schema({
   id: String,
   name: String,
@@ -67,6 +74,9 @@ app.listen(PORT, () => {
 app.get("/auth/login", function (req, res) {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
+
+  playlist_id = req.query.playlist;
+  console.log("playlist_id", req.query, playlist_id);
 
   res.redirect(
     `https://accounts.spotify.com/authorize?${new URLSearchParams({
@@ -113,7 +123,9 @@ app.get("/auth/callback", function (req, res) {
     request.post(authOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
         access_token = body.access_token;
-        res.redirect(`${frontend_base}/#/sender`);
+        if (playlist_id)
+          res.redirect(`${frontend_base}/#/playlist/${playlist_id}`);
+        else res.redirect(`${frontend_base}/#/sender`);
       } else {
         res.send("There was an error during authentication.");
       }
@@ -129,6 +141,8 @@ app.get("/auth/token", (req, res) => {
 
 app.post("/api/create", (req, res) => {
   // console.log("body", req.body);
+  playlist_id = undefined;
+
   Playlist.create({
     ...req.body,
     date: Date.now(),
