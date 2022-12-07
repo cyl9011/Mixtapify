@@ -49,7 +49,7 @@ function Search({ playlist, setPlaylist }) {
         type="text"
         onChange={handleChange}
         value={q}
-        autoComplete="false"
+        autoComplete="off"
       />
       <button onClick={handleSubmit} disabled={q === ""}>
         Submit

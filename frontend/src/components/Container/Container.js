@@ -10,15 +10,17 @@ const Container = ({ children }) => {
   const location = useLocation();
   const route = location.pathname.replaceAll("/", "");
   const pageName =
-    route === "" ? "Welcome to Mixtapify" : appRoutes[camelize(route)].page;
+    route === "" ? "Welcome to Mixtapify" : appRoutes[camelize(route)]?.page;
 
   return (
     <div className={styles.body}>
       <NavBar />
       <div className={styles.container}>
         <div className={styles.background}></div>
-        <h1>{pageName}</h1>
-        {children}
+        <div className={styles.content}>
+          <h1>{pageName}</h1>
+          {children}
+        </div>
       </div>
     </div>
   );

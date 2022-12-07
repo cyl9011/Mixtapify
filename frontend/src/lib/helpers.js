@@ -28,7 +28,7 @@ export const idFn = () => {
 
 export const extractTrackInfo = (tracks) => {
   return tracks?.map((track) => {
-    const { album, artists, duration_ms, name, id } = track;
+    const { album, artists, duration_ms, name, id, uri } = track;
     const image = album.images[0].url;
     const artistStr = artists.map(({ name }) => name).join(", ");
     const albumName = album.name;
@@ -38,6 +38,7 @@ export const extractTrackInfo = (tracks) => {
       duration_ms,
       name,
       id,
+      uri,
       album: albumName,
       artists: artistStr,
     };

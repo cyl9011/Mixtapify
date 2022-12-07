@@ -49,6 +49,8 @@ const SVGLayer = () => {
     selectShape,
     // moveShapeHelper,
     moveShape,
+    from,
+    to,
   } = useContext(ControlContext);
 
   // use useState to set elements in the React state directly
@@ -368,7 +370,7 @@ const SVGLayer = () => {
         this.blur();
         return;
       }
-      ref.current.textContent = this.value == "" ? "Name" : this.value;
+      ref.current.textContent = this.value === "" ? from : this.value;
     };
     input.onblur = function (e) {
       myforeign.remove();
@@ -391,7 +393,7 @@ const SVGLayer = () => {
   }
 
   return (
-    <>
+    <div id="cassette">
       <svg
         id="workspace-svg"
         width="500"
@@ -422,23 +424,23 @@ const SVGLayer = () => {
         {drawing && renderTempShape()}
         <text
           x="200"
-          y="40"
+          y="53"
           style={{ font: "bold italic 20px Lucida Handwriting" }}
         >
           To:
         </text>
         <text
           x="240"
-          y="40"
+          y="53"
           onClick={() => handleText(FirstNameRef)}
           ref={FirstNameRef}
           style={{ font: "italic 20px Lucida Handwriting" }}
         >
-          Name
+          {to}
         </text>
         <text
           x="200"
-          y="60"
+          y="72"
           style={{
             font: "bold italic 20px Lucida Handwriting",
             fill: currBorderColor,
@@ -448,7 +450,7 @@ const SVGLayer = () => {
         </text>
         <text
           x="270"
-          y="60"
+          y="72"
           onClick={() => handleText(LastNameRef)}
           ref={LastNameRef}
           style={{
@@ -456,11 +458,16 @@ const SVGLayer = () => {
             fill: currBorderColor,
           }}
         >
-          Name
+          {from}
         </text>
       </svg>
-      <img src={currCassette} width="500" height="350" />
-    </>
+      <img
+        src={currCassette}
+        alt="cassette background"
+        width="500"
+        height="350"
+      />
+    </div>
   );
 };
 

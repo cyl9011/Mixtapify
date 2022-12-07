@@ -43,8 +43,16 @@ body {
 }
 
 #navbarContainer li a {
-  color: #4b917d;
   font-style: bold;
   text-decoration: none;
   font-weight: bold;
+}
+
+.enabled-link {
+  color: #4fc2a2;
+}
+
+.disabled-link {
+  color: #4b917dc6;
+  pointer-events: none;
 }

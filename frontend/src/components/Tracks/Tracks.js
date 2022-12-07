@@ -2,23 +2,30 @@ import styles from "./Tracks.module.css";
 import { fromMS, idFn } from "../../lib/helpers";
 
 function Tracks({ tracks, addToPlaylist, deleteTrack }) {
-  return tracks?.map((track, index) => {
-    const { image, duration_ms, name, album, artists } = track;
-    const key = `${name} option ${index}`;
+  return (
+    <div
+      className={tracks.length > 0 ? styles.container : ""}
+      style={{ height: deleteTrack ? "auto" : "50vh" }}
+    >
+      {tracks?.map((track, index) => {
+        const { image, duration_ms, name, album, artists } = track;
+        const key = `${name} option ${index}`;
 
-    return (
-      <Track
-        image={image}
-        artists={artists}
-        album={album}
-        duration_ms={duration_ms}
-        key={key}
-        name={name}
-        onClick={addToPlaylist ? () => addToPlaylist(track) : idFn}
-        deleteTrack={deleteTrack ? () => deleteTrack(index) : undefined}
-      />
-    );
-  });
+        return (
+          <Track
+            image={image}
+            artists={artists}
+            album={album}
+            duration_ms={duration_ms}
+            key={key}
+            name={name}
+            onClick={addToPlaylist ? () => addToPlaylist(track) : idFn}
+            deleteTrack={deleteTrack ? () => deleteTrack(index) : undefined}
+          />
+        );
+      })}
+    </div>
+  );
 }
 
 function Track({

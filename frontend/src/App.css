@@ -44,6 +44,17 @@
   padding: 1vh 1.5vw;
   border-radius: 15px;
   border: none;
-  font-size: 0.5em;
+  font-size: 0.4em;
   font-weight: bold;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  color: white;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  padding: 1vh 1vw;
+  font-size: 0.5em;
 }
