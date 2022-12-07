@@ -4,7 +4,7 @@ import { fromMS, idFn } from "../../lib/helpers";
 function Tracks({ tracks, addToPlaylist, deleteTrack }) {
   return (
     <div
-      className={tracks.length > 0 ? styles.container : ""}
+      className={tracks?.length > 0 ? styles.container : ""}
       style={{ height: deleteTrack ? "auto" : "50vh" }}
     >
       {tracks?.map((track, index) => {
