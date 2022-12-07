@@ -1,5 +1,6 @@
 import styles from "./Tracks.module.css";
 import { fromMS, idFn } from "../../lib/helpers";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function Tracks({ tracks, addToPlaylist, deleteTrack }) {
   return (
@@ -38,16 +39,18 @@ function Track({
   deleteTrack,
 }) {
   return (
-    <div className={styles.track} onClick={onClick}>
-      <img src={image} alt={`${name} by ${artists} album cover`} width={50} />
-      <div className={styles.trackInfo}>
-        <p>{name}</p>
+    <tr className={styles.track} onClick={onClick}>
+      <td style={{ width: "5%" }}>
+        <img src={image} alt={`${name} by ${artists} album cover`} width={50} />
+      </td>
+      <td className={styles.trackInfo} style={{ width: "20%" }}>
+        <p className={styles.trackTitle}>{name}</p>
         <p>{artists}</p>
-      </div>
-      <p>{album}</p>
-      <p>{fromMS(duration_ms)}</p>
-      {deleteTrack && <button onClick={deleteTrack}>delete</button>}
-    </div>
+      </td>
+      <td style={{ width: "35%" }}>{album}</td>
+      <td style={{ width: "5%" }}>{fromMS(duration_ms)}</td>
+      {deleteTrack && <DeleteIcon onClick={deleteTrack} style={{margin: "auto"}}/>}
+    </tr>
   );
 }
 
