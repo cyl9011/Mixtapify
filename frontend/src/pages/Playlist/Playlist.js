@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import AuthContext from "../../lib/AuthContext";
 import Tracks from "../../components/Tracks/Tracks";
 import Cassette from "../../components/Cassette/Cassette";
+import Player from "../../components/Player.js/Player";
 
 function Playlist() {
   const { id } = useParams();
@@ -81,21 +82,28 @@ function Playlist() {
   }
 
   return (
-    <>
+    <div>
+      <h2>{data?.title}</h2>
+      <h3>
+        From {data?.from} to {data?.to}
+      </h3>
       <Cassette cassetteStr={data?.cassette} />
+      <Player playlistID={id} tracks={data?.tracks} />
       <Tracks tracks={data?.tracks ?? []} />
       <button className="btn" onClick={copyToClip}>
         Copy Mixtape Link
       </button>
-      <button className="btn" onClick={makePlaylist}>
-        Save as Playlist
-      </button>
+      {token && (
+        <button className="btn" onClick={makePlaylist}>
+          Save as Playlist
+        </button>
+      )}
       {playlistURL && (
         <a target="_blank" rel="noreferrer" href={playlistURL}>
           View Playlist on Spotify
         </a>
       )}
-    </>
+    </div>
   );
 }
 
