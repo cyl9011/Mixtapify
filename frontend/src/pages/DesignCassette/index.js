@@ -12,7 +12,10 @@ const DesignCassette = () => {
   return (
     <div className="workspace-container">
       <div className="cassette-container">
-        <Cassette />
+        <Cassette
+          from={mixtape?.from && mixtape?.from !== "" ? mixtape?.from : "Name"}
+          to={mixtape?.to && mixtape?.to !== "" ? mixtape?.to : "Name"}
+        />
       </div>
       <button
         className={cn("btn", "cassette-btn")}

@@ -534,6 +534,9 @@ class DesignCassette extends Component {
 
             currCommand: this.state.currCommand,
             commandLength: this.state.commandList.length,
+
+            from: this.props.from,
+            to: this.props.to,
           }}
         >
           <ControlPanel />
