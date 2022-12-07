@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import appRoutes from "./lib/appRoutes";
 
-import NavBar from "./components/NavBar/NavBar";
 import Home from "./pages/Home/Home";
 import Footer from "./pages/Footer/Footer";
 import Sender from "./pages/Sender/Sender";
@@ -22,15 +21,10 @@ import Container from "./components/Container/Container";
 let globalItems = 0;
 
 const App = () => {
-  // SSUI Lab 7
-  const [cartItems, setCartItems] = useState([]);
-  const [newShirt, setNewShirt] = useState();
-
   const [token, setToken] = useState("");
-
-  function updateNewShirt(e) {
-    setNewShirt(e.target.value);
-  }
+  const [mixtape, setMixtape] = useState({
+    date: Date.now(),
+  });
 
   useEffect(() => {
     const getToken = refreshToken(setToken);
@@ -38,22 +32,9 @@ const App = () => {
     console.log(token);
   }, []);
 
-  function createNewShirt() {
-    setCartItems([...cartItems, { text: newShirt, id: ++globalItems }]);
-  }
-
-  function deleteShirt(id) {
-    let tempCartItems = [...cartItems];
-    tempCartItems.splice(
-      tempCartItems.findIndex((d) => d.id === d),
-      1
-    );
-    setCartItems(tempCartItems);
-  }
-
   return (
     <div className="App">
-      <AuthContext.Provider value={{ token, setToken }}>
+      <AuthContext.Provider value={{ token, setToken, mixtape, setMixtape }}>
         <div className="MainContent">
           <Container>
             <Routes>
@@ -74,6 +55,10 @@ const App = () => {
               <Route
                 path={appRoutes.notImplemented.route}
                 element={<NotImplemented />}
+              />
+              <Route
+                path="*"
+                element={<Navigate to={appRoutes.notImplemented.route} />}
               />
             </Routes>
           </Container>

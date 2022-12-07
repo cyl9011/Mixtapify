@@ -1,4 +1,5 @@
-.me-auto {
+#nav {
+  position: relative;
 }
 
 .bg-dark h1 {
@@ -24,14 +25,14 @@ body {
   font-style: bold;
 }
 
+#navbarContainer {
+  width: 15vw;
+  z-index: 1;
+}
+
 #navbarContainer ul {
   padding: 1rem;
-
   z-index: 10;
-  position: absolute;
-  top: 90px;
-  left: 20px;
-
   list-style-type: none;
   font-size: medium;
   text-align: end;
@@ -44,12 +45,16 @@ body {
 }
 
 #navbarContainer li a {
-  color: #4b917d;
   font-style: bold;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-.bg-dark li a {
-  text-decoration: none;
-  color: #4b917d;
-  text-decoration: bold;
+.enabled-link {
+  color: #4fc2a2;
+}
+
+.disabled-link {
+  color: #4b917dc6;
+  pointer-events: none;
 }

@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import cn from "classnames";
 
+import AuthContext from "../../lib/AuthContext";
 import Search from "../../components/Search/Search";
 import Tracks from "../../components/Tracks/Tracks";
+import styles from "./Build.module.css";
+import Cassette from "../../components/Cassette/Cassette";
 
 function Build() {
   const [playlist, setPlaylist] = useState([]);
+  const { mixtape, setMixtape } = useContext(AuthContext);
+
+  console.log(mixtape);
+
   const navigate = useNavigate();
 
   const createPlaylist = () => {
@@ -22,8 +30,7 @@ function Build() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Michelle",
-        to: "SSUI",
+        ...mixtape,
         tracks,
         date: Date.now(),
       }),
@@ -41,11 +48,23 @@ function Build() {
   };
 
   return (
-    <>
-      <Tracks tracks={playlist} deleteTrack={deleteTrack} />
+    <div className={styles.container}>
+      <Cassette cassetteStr={mixtape?.cassette} />
+      <div className={styles.curPlaylist}>
+        {playlist.length > 0 ? (
+          <Tracks tracks={playlist} deleteTrack={deleteTrack} />
+        ) : (
+          <p>
+            You currently do not have any songs in your playlist. Begin by
+            searching for a song.
+          </p>
+        )}
+      </div>
       <Search setPlaylist={setPlaylist} playlist={playlist} />
-      <button onClick={createPlaylist}>Create Playlist</button>
-    </>
+      <button className={cn(styles.create, "btn")} onClick={createPlaylist}>
+        Create Playlist
+      </button>
+    </div>
   );
 }
 
