@@ -1,0 +1,29 @@
+.track {
+  display: flex;
+  width: 40vw;
+}
+.trackInfo,
+.track:hover {
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  overflow: auto;
+  margin-top: 3vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tracks {
+  width: 100%;
+  display: table;
+}
+
+p {
+  font-size: 0.5em;
+}
+
+img {
+  object-fit: contain;
+}

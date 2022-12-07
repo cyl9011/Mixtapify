@@ -1,0 +1,13 @@
+.cassette-container,
+.workspace-container {
+  display: flex;
+}
+.workspace-container {
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.cassette-btn {
+  margin: 2vh 0;
+}

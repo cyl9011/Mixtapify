@@ -1,0 +1,60 @@
+#nav {
+  position: relative;
+}
+
+.bg-dark h1 {
+  color: white;
+}
+
+.nav a {
+  color: white;
+}
+
+.bg-dark a {
+  color: white;
+}
+
+body {
+  color: white;
+}
+
+.welcome {
+  color: #ffffff;
+  padding: 50px;
+  font-size: 3rem;
+  font-style: bold;
+}
+
+#navbarContainer {
+  width: 15vw;
+  z-index: 1;
+}
+
+#navbarContainer ul {
+  padding: 1rem;
+  z-index: 10;
+  list-style-type: none;
+  font-size: medium;
+  text-align: end;
+}
+
+#navbarContainer li {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+#navbarContainer li a {
+  font-style: bold;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.enabled-link {
+  color: #4fc2a2;
+}
+
+.disabled-link {
+  color: #4b917dc6;
+  pointer-events: none;
+}

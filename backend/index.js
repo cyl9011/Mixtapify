@@ -12,7 +12,8 @@ require("dotenv").config();
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your client id
 console.log(client_id);
-const scope = "streaming user-read-private user-read-email user-top-read";
+const scope =
+  "streaming user-read-private user-read-email user-top-read playlist-modify-private";
 const redirect_uri =
   process.env.REDIRECT_URI || `http://localhost:${PORT}/auth/callback`;
 const frontend_base = process.env.FRONTEND_BASE || `http://localhost:3000`;
@@ -29,6 +30,30 @@ const generateRandomString = (length) => {
 };
 
 const stateKey = "spotify_auth_state";
+
+mongoose.connect("mongodb://localhost:27017/mixtapes");
+const trackSchema = new mongoose.Schema({
+  id: String,
+  name: String,
+  duration_ms: String,
+  artists: String,
+  album: String,
+  annotation: String,
+  image: String,
+  uri: String,
+});
+const Track = mongoose.model("Track", trackSchema);
+
+const playlistSchema = new mongoose.Schema({
+  from: String,
+  to: String,
+  tracks: [trackSchema],
+  title: String,
+  cassette: String,
+  date: Date,
+  id: String,
+});
+const Playlist = mongoose.model("Playlist", playlistSchema);
 
 app
   .use(express.json())
@@ -89,7 +114,7 @@ app.get("/auth/callback", function (req, res) {
     request.post(authOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
         access_token = body.access_token;
-        res.redirect(frontend_base);
+        res.redirect(`${frontend_base}/#/sender`);
       } else {
         res.send("There was an error during authentication.");
       }
@@ -100,5 +125,27 @@ app.get("/auth/callback", function (req, res) {
 app.get("/auth/token", (req, res) => {
   res.json({
     access_token: access_token,
+  });
+});
+
+app.post("/api/create", (req, res) => {
+  // console.log("body", req.body);
+  Playlist.create({
+    ...req.body,
+    date: Date.now(),
+  }).then((playlist) => {
+    res.json(playlist);
+  });
+});
+
+app.get("/api/playlist/:id", (req, res) => {
+  const id = req.params.id;
+
+  Playlist.findById(id, function (err, playlist) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(playlist);
+    }
   });
 });
