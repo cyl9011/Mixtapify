@@ -29,12 +29,11 @@ function Search({ playlist, setPlaylist }) {
     console.log(res);
   }
 
-  const handleSubmit = () => {
-    search(q);
-  };
-
   const handleChange = (e) => {
     setQ(e.target.value);
+    search(e.target.value);
+    if (e?.target?.value && e.target.value !== "") {
+    }
   };
 
   const addToPlaylist = (track) => {
@@ -43,17 +42,14 @@ function Search({ playlist, setPlaylist }) {
 
   return (
     <div>
-      <label htmlFor="track">Search</label>
       <input
         id="track"
         type="text"
         onChange={handleChange}
         value={q}
         autoComplete="off"
+        placeholder="Search Songs"
       />
-      <button onClick={handleSubmit} disabled={q === ""}>
-        Submit
-      </button>
       <Tracks tracks={extractTrackInfo(res)} addToPlaylist={addToPlaylist} />
     </div>
   );

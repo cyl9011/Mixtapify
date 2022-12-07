@@ -57,7 +57,7 @@ function Build() {
           <Tracks tracks={playlist} deleteTrack={deleteTrack} />
         ) : (
           <p>
-            You currently do not have any songs in your playlist. Begin by
+            You currently do not have any songs in your mixtape. Begin by
             searching for a song.
           </p>
         )}
