@@ -49,6 +49,7 @@ function Search({ playlist, setPlaylist }) {
         value={q}
         autoComplete="off"
         placeholder="Search Songs"
+        style={{marginBottom: "20px"}}
       />
       <Tracks tracks={extractTrackInfo(res)} addToPlaylist={addToPlaylist} />
     </div>

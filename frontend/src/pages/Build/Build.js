@@ -56,7 +56,7 @@ function Build() {
         {playlist.length > 0 ? (
           <Tracks tracks={playlist} deleteTrack={deleteTrack} />
         ) : (
-          <p>
+          <p style={{fontSize: "1rem"}}>
             You currently do not have any songs in your mixtape. Begin by
             searching for a song.
           </p>
