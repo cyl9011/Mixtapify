@@ -3,7 +3,7 @@ import { fromMS, idFn } from "../../lib/helpers";
 import DeleteIcon from "@mui/icons-material/Delete";
 import cn from "classnames";
 
-function Tracks({ tracks, addToPlaylist, deleteTrack, currentTrack }) {
+function Tracks({ tracks, clickTrack, deleteTrack, currentTrack }) {
   return (
     <div
       className={tracks?.length > 0 ? styles.container : ""}
@@ -23,7 +23,7 @@ function Tracks({ tracks, addToPlaylist, deleteTrack, currentTrack }) {
             duration_ms={duration_ms}
             key={key}
             name={name}
-            onClick={addToPlaylist ? () => addToPlaylist(track) : idFn}
+            onClick={clickTrack ? () => clickTrack(track, index) : idFn}
             deleteTrack={deleteTrack ? () => deleteTrack(index) : undefined}
           />
         );
