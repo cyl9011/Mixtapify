@@ -121,7 +121,7 @@ const Modes = ({
       stickerImg: e.target.value,
       initCoords: { x: 225, y: 180 },
       finalCoords: { x: 20, y: 20 },
-      borderColor: "transparent",
+      borderColor: "#000",
       borderWidth: 3,
       fillColor: "transparent",
       stickerSize: currStickerSize,
