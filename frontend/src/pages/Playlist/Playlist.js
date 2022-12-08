@@ -97,7 +97,11 @@ function Playlist() {
         playlistID={id}
         tracks={data?.tracks}
       />
-      <Tracks currentTrack={currentTrack} tracks={data?.tracks ?? []} />
+      <Tracks
+        currentTrack={currentTrack}
+        tracks={data?.tracks ?? []}
+        clickTrack={(track, index) => setCurrentTrack(index)}
+      />
       <div className={styles.btns}>
         <button className="btn" onClick={copyToClip}>
           Copy Mixtape Link

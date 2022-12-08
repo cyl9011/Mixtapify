@@ -127,7 +127,7 @@ function Player({ playlistID, tracks, currentTrack, setCurrentTrack }) {
         </div>
       ) : (
         <>
-          {setAutoplayFailed && (
+          {autoplayFailed && (
             <div>
               <p style={{ fontSize: "1rem" }}>Click Play to Begin</p>
             </div>
@@ -141,6 +141,7 @@ function Player({ playlistID, tracks, currentTrack, setCurrentTrack }) {
             deviceID={deviceID}
             is_paused={is_paused}
             setPaused={setPaused}
+            setAutoplayFailed={setAutoplayFailed}
           />
         </>
       )}
@@ -157,6 +158,7 @@ const WebPlayback = ({
   deviceID,
   is_paused,
   setPaused,
+  setAutoplayFailed,
 }) => {
   const [is_active, setActive] = useState(false);
   console.log("web player", play, deviceID);
@@ -180,6 +182,7 @@ const WebPlayback = ({
         onClick={() => {
           player.togglePlay();
           setPaused(!is_paused);
+          setAutoplayFailed(false);
         }}
       >
         {is_paused ? (

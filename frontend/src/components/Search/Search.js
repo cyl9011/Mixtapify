@@ -36,7 +36,7 @@ function Search({ playlist, setPlaylist }) {
     }
   };
 
-  const addToPlaylist = (track) => {
+  const clickTrack = (track) => {
     setPlaylist([...playlist, track]);
   };
 
@@ -49,9 +49,9 @@ function Search({ playlist, setPlaylist }) {
         value={q}
         autoComplete="off"
         placeholder="Search Songs"
-        style={{marginBottom: "20px"}}
+        style={{ marginBottom: "20px" }}
       />
-      <Tracks tracks={extractTrackInfo(res)} addToPlaylist={addToPlaylist} />
+      <Tracks tracks={extractTrackInfo(res)} clickTrack={clickTrack} />
     </div>
   );
 }
