@@ -1,7 +1,11 @@
-.btnControl {
+.btnControl,
+.btnDisabled {
   background-color: transparent;
   border: none;
 }
 .btnControl:hover {
   cursor: pointer;
+}
+.btnDisabled:hover {
+  cursor: not-allowed;
 }

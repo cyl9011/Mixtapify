@@ -102,19 +102,30 @@ function Player({ playlistID, tracks }) {
   );
 }
 
-const WebPlayback = ({ player, play, currentTrack, tracks }) => {
+const WebPlayback = ({
+  player,
+  play,
+  setCurrentTrack,
+  currentTrack,
+  tracks,
+}) => {
   const [is_paused, setPaused] = useState(true);
   const [is_active, setActive] = useState(false);
   console.log("web player", player);
   return (
     <div>
       <button
-        className={styles.btnControl}
+        className={currentTrack === 0 ? styles.btnDisabled : styles.btnControl}
         onClick={() => {
+          if (currentTrack === 0) return;
+          setCurrentTrack(currentTrack - 1);
           player.previousTrack();
         }}
+        disabled={currentTrack === 0}
       >
-        <FastRewindIcon style={{ color: "white" }} />
+        <FastRewindIcon
+          style={{ color: currentTrack === 0 ? "grey" : "white" }}
+        />
       </button>
 
       <button
@@ -132,12 +143,23 @@ const WebPlayback = ({ player, play, currentTrack, tracks }) => {
       </button>
 
       <button
-        className={styles.btnControl}
+        className={
+          currentTrack === tracks?.length - 1
+            ? styles.btnDisabled
+            : styles.btnControl
+        }
         onClick={() => {
-          player.nextTrack();
+          if (currentTrack === tracks?.length - 1) return;
+          setCurrentTrack(currentTrack + 1);
+          player.previousTrack();
         }}
+        disabled={currentTrack === tracks?.length - 1}
       >
-        <FastForwardIcon style={{ color: "white" }} />
+        <FastForwardIcon
+          style={{
+            color: currentTrack === tracks?.length - 1 ? "grey" : "white",
+          }}
+        />
       </button>
     </div>
   );
