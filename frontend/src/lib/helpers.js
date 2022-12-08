@@ -23,6 +23,14 @@ export const refreshToken = (setToken) => {
 };
 
 export const idFn = () => {
+  console.log("pls");
+
+  return undefined;
+};
+
+export const reorderTrack = (track, index) => {
+  /* reorder tracks when dragged */
+  console.log(track, index);
   return undefined;
 };
 

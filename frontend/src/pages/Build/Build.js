@@ -49,18 +49,18 @@ function Build() {
 
   return (
     <div className={styles.container}>
-      <Cassette
-        cassetteStr={mixtape?.cassette}
-      />
-      <div className={styles.curPlaylist}>
-        {playlist.length > 0 ? (
-          <Tracks tracks={playlist} deleteTrack={deleteTrack} />
-        ) : (
-          <p style={{fontSize: "1rem"}}>
-            You currently do not have any songs in your mixtape. Begin by
-            searching for a song.
-          </p>
-        )}
+      <div style={{ display:"inline-block"}}>
+        <Cassette cassetteStr={mixtape?.cassette} />
+        <div className={styles.curPlaylist}>
+          {playlist.length > 0 ? (
+            <Tracks tracks={playlist} deleteTrack={deleteTrack} />
+          ) : (
+            <p style={{ fontSize: "1rem" }}>
+              You currently do not have any songs in your mixtape. Begin by
+              searching for a song.
+            </p>
+          )}
+        </div>
       </div>
       <Search setPlaylist={setPlaylist} playlist={playlist} />
       <button className={cn(styles.create, "btn")} onClick={createPlaylist}>
