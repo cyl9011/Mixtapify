@@ -1,0 +1,7 @@
+.btnControl {
+  background-color: transparent;
+  border: none;
+}
+.btnControl:hover {
+  cursor: pointer;
+}

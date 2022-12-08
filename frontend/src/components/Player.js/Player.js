@@ -1,5 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import cn from "classnames";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import PauseIcon from "@material-ui/icons/Pause";
+import FastForwardIcon from "@material-ui/icons/FastForward";
+import FastRewindIcon from "@material-ui/icons/FastRewind";
 
 import styles from "./Player.module.css";
 import AuthContext from "../../lib/AuthContext";
@@ -106,31 +109,35 @@ const WebPlayback = ({ player, play, currentTrack, tracks }) => {
   return (
     <div>
       <button
-        className="btn-spotify"
+        className={styles.btnControl}
         onClick={() => {
           player.previousTrack();
         }}
       >
-        &lt;&lt;
+        <FastRewindIcon style={{ color: "white" }} />
       </button>
 
       <button
-        className="btn-spotify"
+        className={styles.btnControl}
         onClick={() => {
           player.togglePlay();
           setPaused(!is_paused);
         }}
       >
-        {is_paused ? "PLAY" : "PAUSE"}
+        {is_paused ? (
+          <PlayArrowIcon style={{ color: "white" }} />
+        ) : (
+          <PauseIcon style={{ color: "white" }} />
+        )}
       </button>
 
       <button
-        className="btn-spotify"
+        className={styles.btnControl}
         onClick={() => {
           player.nextTrack();
         }}
       >
-        &gt;&gt;
+        <FastForwardIcon style={{ color: "white" }} />
       </button>
     </div>
   );
