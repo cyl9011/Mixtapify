@@ -1,6 +1,7 @@
 .cassette-container,
 .workspace-container {
   display: flex;
+  padding-left: 60px;
 }
 .workspace-container {
   flex-direction: column;
