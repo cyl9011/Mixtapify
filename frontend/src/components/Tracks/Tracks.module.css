@@ -35,7 +35,8 @@ td {
 
 .track:hover {
   cursor: pointer;
-  background-color: rgb(230, 230, 230);
+  background-color: rgba(230, 230, 230, 0.2);
+  border-radius: 5px;
 }
 
 .tracksContainer {

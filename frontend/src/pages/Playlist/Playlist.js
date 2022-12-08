@@ -6,6 +6,8 @@ import Tracks from "../../components/Tracks/Tracks";
 import Cassette from "../../components/Cassette/Cassette";
 import Player from "../../components/Player.js/Player";
 
+import styles from "./Playlist.module.css";
+
 function Playlist() {
   const { id } = useParams();
   const { token } = useContext(AuthContext);
@@ -90,14 +92,16 @@ function Playlist() {
       <Cassette cassetteStr={data?.cassette} />
       <Player playlistID={id} tracks={data?.tracks} />
       <Tracks tracks={data?.tracks ?? []} />
-      <button className="btn" onClick={copyToClip}>
-        Copy Mixtape Link
-      </button>
-      {token && (
-        <button className="btn" onClick={makePlaylist}>
-          Save as Playlist
+      <div className={styles.btns}>
+        <button className="btn" onClick={copyToClip}>
+          Copy Mixtape Link
         </button>
-      )}
+        {token && (
+          <button className="btn" onClick={makePlaylist}>
+            Save to Spotify
+          </button>
+        )}
+      </div>
       {playlistURL && (
         <a target="_blank" rel="noreferrer" href={playlistURL}>
           View Playlist on Spotify
