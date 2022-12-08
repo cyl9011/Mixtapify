@@ -33,9 +33,11 @@ td {
   padding: 1vh 1.2vw;
 }
 
-.track:hover {
+.track:hover,
+.currentlyPlaying {
   cursor: pointer;
-  background-color: rgb(230, 230, 230);
+  background-color: rgba(230, 230, 230, 0.1);
+  border-radius: 5px;
 }
 
 .tracksContainer {

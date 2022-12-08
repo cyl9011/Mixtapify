@@ -6,6 +6,8 @@
   width: 500px;
 
   margin-bottom: 2vh;
+
+  margin: 0 auto;
 }
 
 #workspace-svg,
