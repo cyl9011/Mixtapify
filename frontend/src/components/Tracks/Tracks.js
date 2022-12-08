@@ -46,7 +46,7 @@ function Track({
   return (
     <tr
       className={
-        currentTrack && index === currentTrack
+        currentTrack !== undefined && index === currentTrack
           ? cn(styles.track, styles.currentlyPlaying)
           : styles.track
       }
