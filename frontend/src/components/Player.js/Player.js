@@ -33,11 +33,10 @@ const playCur =
     });
   };
 
-function Player({ playlistID, tracks }) {
+function Player({ playlistID, tracks, currentTrack, setCurrentTrack }) {
   const { token, setToken } = useContext(AuthContext);
   const [deviceID, setDeviceID] = useState(undefined);
   const [player, setPlayer] = useState(undefined);
-  const [currentTrack, setCurrentTrack] = useState(0);
   const [play, setPlay] = useState(() => undefined);
 
   console.log("tracks", tracks);

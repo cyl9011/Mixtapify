@@ -13,6 +13,7 @@ function Playlist() {
   const { token } = useContext(AuthContext);
 
   const [data, setData] = useState(undefined);
+  const [currentTrack, setCurrentTrack] = useState(0);
   const [link, setLink] = useState("");
   const [playlistURL, setPlaylistURL] = useState(undefined);
 
@@ -90,8 +91,13 @@ function Playlist() {
         From {data?.from} to {data?.to}
       </h3>
       <Cassette cassetteStr={data?.cassette} />
-      <Player playlistID={id} tracks={data?.tracks} />
-      <Tracks tracks={data?.tracks ?? []} />
+      <Player
+        currentTrack={currentTrack}
+        setCurrentTrack={setCurrentTrack}
+        playlistID={id}
+        tracks={data?.tracks}
+      />
+      <Tracks currentTrack={currentTrack} tracks={data?.tracks ?? []} />
       <div className={styles.btns}>
         <button className="btn" onClick={copyToClip}>
           Copy Mixtape Link
