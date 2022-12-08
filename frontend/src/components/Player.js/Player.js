@@ -9,27 +9,21 @@ import AuthContext from "../../lib/AuthContext";
 import Login from "../Login/Login";
 import { refreshToken } from "../../lib/helpers";
 
-function Player({ playlistID, tracks }) {
-  const { token, setToken } = useContext(AuthContext);
-  const [deviceID, setDeviceID] = useState(undefined);
-  const [player, setPlayer] = useState(undefined);
-  const [currentTrack, setCurrentTrack] = useState(0);
-
-  console.log("tracks", tracks);
-
-  const play = ({
-    uris,
+const playCur =
+  ({
     playerInstance: {
       _options: { getOAuthToken },
     },
     device_id,
-  }) => {
+  }) =>
+  (uri) => {
     getOAuthToken((access_token) => {
+      console.log("uri", uri);
       fetch(
         `https://api.spotify.com/v1/me/player/play?device_id=${device_id}`,
         {
           method: "PUT",
-          body: JSON.stringify({ uris }),
+          body: JSON.stringify({ uris: [uri] }),
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${access_token}`,
@@ -38,6 +32,15 @@ function Player({ playlistID, tracks }) {
       );
     });
   };
+
+function Player({ playlistID, tracks }) {
+  const { token, setToken } = useContext(AuthContext);
+  const [deviceID, setDeviceID] = useState(undefined);
+  const [player, setPlayer] = useState(undefined);
+  const [currentTrack, setCurrentTrack] = useState(0);
+  const [play, setPlay] = useState(() => undefined);
+
+  console.log("tracks", tracks);
 
   const getToken = refreshToken(setToken);
 
@@ -60,13 +63,14 @@ function Player({ playlistID, tracks }) {
       });
 
       player.addListener("ready", ({ device_id }) => {
-        console.log("Ready with Device ID", device_id);
-        setDeviceID(device_id);
-        play({
-          uris: tracks.map((track) => track.uri),
+        const playFn = playCur({
           playerInstance: player,
           device_id,
         });
+        console.log("Ready with Device ID", device_id, playFn);
+        setDeviceID(device_id);
+        setPlay(playFn);
+        playFn(tracks[currentTrack]?.uri);
       });
 
       player.addListener("not_ready", ({ device_id }) => {
@@ -78,6 +82,22 @@ function Player({ playlistID, tracks }) {
       setPlayer(player);
     }
   }, [token, tracks]);
+
+  useEffect(() => {
+    if (
+      deviceID &&
+      tracks &&
+      tracks.length > currentTrack &&
+      tracks[currentTrack]
+    ) {
+      console.log("bruh", deviceID);
+      const playFn = playCur({
+        playerInstance: player,
+        device_id: deviceID,
+      });
+      playFn(tracks[currentTrack]?.uri);
+    }
+  }, [tracks, currentTrack, deviceID, player]);
 
   return (
     <div className={styles.container}>
@@ -96,6 +116,7 @@ function Player({ playlistID, tracks }) {
           currentTrack={currentTrack}
           setCurrentTrack={setCurrentTrack}
           tracks={tracks}
+          deviceID={deviceID}
         />
       )}
     </div>
@@ -108,10 +129,11 @@ const WebPlayback = ({
   setCurrentTrack,
   currentTrack,
   tracks,
+  deviceID,
 }) => {
   const [is_paused, setPaused] = useState(true);
   const [is_active, setActive] = useState(false);
-  console.log("web player", player);
+  console.log("web player", play, deviceID);
   return (
     <div>
       <button
@@ -119,7 +141,6 @@ const WebPlayback = ({
         onClick={() => {
           if (currentTrack === 0) return;
           setCurrentTrack(currentTrack - 1);
-          player.previousTrack();
         }}
         disabled={currentTrack === 0}
       >
@@ -151,7 +172,6 @@ const WebPlayback = ({
         onClick={() => {
           if (currentTrack === tracks?.length - 1) return;
           setCurrentTrack(currentTrack + 1);
-          player.previousTrack();
         }}
         disabled={currentTrack === tracks?.length - 1}
       >
