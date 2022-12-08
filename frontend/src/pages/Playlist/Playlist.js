@@ -109,9 +109,11 @@ function Playlist() {
         )}
       </div>
       {playlistURL && (
-        <a target="_blank" rel="noreferrer" href={playlistURL}>
-          View Playlist on Spotify
-        </a>
+        <div className={styles.viewPlaylist}>
+          <a target="_blank" rel="noreferrer" href={playlistURL}>
+            View Playlist on Spotify
+          </a>
+        </div>
       )}
     </div>
   );
