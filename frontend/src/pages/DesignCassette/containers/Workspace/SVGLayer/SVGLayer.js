@@ -14,7 +14,6 @@ import Draw from "./shapes/Draw";
 import ControlContext from "../../../contexts/control-context";
 import { selectShadowId } from "../../../shared/util";
 
-import CassetteImg from "../../../assets/cassettes/1099 1.jpg";
 import Sticker from "./shapes/Sticker";
 
 const SVGLayer = () => {

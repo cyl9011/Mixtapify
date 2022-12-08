@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import GreenCassette from "../assets/cassettes/1099 1.jpg";
+import GreenCassette from "../assets/cassettes/1099 1.png";
 
 export const genId = () => {
   // return new Date().getTime().toString();

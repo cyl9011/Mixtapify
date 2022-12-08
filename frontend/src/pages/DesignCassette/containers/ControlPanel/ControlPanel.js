@@ -7,12 +7,12 @@ import CursorImg from "../../assets/img/cursor.png";
 import LineImg from "../../assets/img/line.png";
 import DrawImg from "../../assets/img/draw.png";
 import TextImg from "../../assets/img/text.png";
-import GreenCassette from "../../assets/cassettes/1099 1.jpg";
-import BrownCassette from "../../assets/cassettes/1099 2.jpg";
-import YellowCassette from "../../assets/cassettes/1099 3.jpg";
-import GrayCassette from "../../assets/cassettes/1099 4.jpg";
-import BlueCassette from "../../assets/cassettes/1099 5.jpg";
-import RedCassette from "../../assets/cassettes/1099 6.jpg";
+import GreenCassette from "../../assets/cassettes/1099 1.png";
+import BrownCassette from "../../assets/cassettes/1099 2.png";
+import YellowCassette from "../../assets/cassettes/1099 3.png";
+import GrayCassette from "../../assets/cassettes/1099 4.png";
+import BlueCassette from "../../assets/cassettes/1099 5.png";
+import RedCassette from "../../assets/cassettes/1099 6.png";
 import supportedColors from "../../shared/supportedColors";
 import ControlContext from "../../contexts/control-context";
 
