@@ -38,6 +38,8 @@ function Player({ playlistID, tracks, currentTrack, setCurrentTrack }) {
   const [deviceID, setDeviceID] = useState(undefined);
   const [player, setPlayer] = useState(undefined);
   const [play, setPlay] = useState(() => undefined);
+  const [autoplayFailed, setAutoplayFailed] = useState(false);
+  const [is_paused, setPaused] = useState(false);
 
   console.log("tracks", tracks);
 
@@ -76,6 +78,21 @@ function Player({ playlistID, tracks, currentTrack, setCurrentTrack }) {
         console.log("Device ID has gone offline", device_id);
       });
 
+      player.addListener("autoplay_failed", () => {
+        console.log("Autoplay is not allowed by the browser autoplay rules");
+        setAutoplayFailed(true);
+        setPaused(true);
+      });
+
+      player.addListener("player_state_changed", (state) => {
+        if (!state) {
+          return;
+        }
+
+        setPaused(state.paused);
+        player.activateElement();
+      });
+
       player.connect();
       console.log("player", player);
       setPlayer(player);
@@ -102,21 +119,30 @@ function Player({ playlistID, tracks, currentTrack, setCurrentTrack }) {
     <div className={styles.container}>
       {token == null || token === "" || token === undefined ? (
         <div>
-          <p>
+          <p style={{ fontSize: "1rem" }}>
             It looks like you aren't logged into Spotify yet. Please log in to
             play the mixtape.
           </p>
           <Login referrer={playlistID} />
         </div>
       ) : (
-        <WebPlayback
-          player={player}
-          play={play}
-          currentTrack={currentTrack}
-          setCurrentTrack={setCurrentTrack}
-          tracks={tracks}
-          deviceID={deviceID}
-        />
+        <>
+          {setAutoplayFailed && (
+            <div>
+              <p style={{ fontSize: "1rem" }}>Click Play to Begin</p>
+            </div>
+          )}
+          <WebPlayback
+            player={player}
+            play={play}
+            currentTrack={currentTrack}
+            setCurrentTrack={setCurrentTrack}
+            tracks={tracks}
+            deviceID={deviceID}
+            is_paused={is_paused}
+            setPaused={setPaused}
+          />
+        </>
       )}
     </div>
   );
@@ -129,8 +155,9 @@ const WebPlayback = ({
   currentTrack,
   tracks,
   deviceID,
+  is_paused,
+  setPaused,
 }) => {
-  const [is_paused, setPaused] = useState(true);
   const [is_active, setActive] = useState(false);
   console.log("web player", play, deviceID);
   return (
