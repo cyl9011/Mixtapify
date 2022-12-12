@@ -1,0 +1,2 @@
+/auth/* https://sounds-around-us.herokuapp.com/auth/:splat 200
+/api/* https://sounds-around-us.herokuapp.com/api/:splat 200
