@@ -8,8 +8,8 @@ const mongoose = require("mongoose");
 const { URLSearchParams } = require("url");
 require("dotenv").config();
 
-const client_id = process.env.CLIENT_ID; // Your client id
-const client_secret = process.env.CLIENT_SECRET; // Your client id
+const client_id = process.env.CLIENT_ID; // Your Spotify client id
+const client_secret = process.env.CLIENT_SECRET; // Your Spotify client id
 console.log(client_id);
 const scope =
   "streaming user-read-private user-read-email user-top-read playlist-modify-private";
