@@ -52,9 +52,7 @@ function Player({ playlistID, tracks, currentTrack, setCurrentTrack }) {
   });
 
   useEffect(() => {
-    if (!token) {
-      getToken();
-    } else {
+    if (token) {
       const player = new window.Spotify.Player({
         name: "Web Playback SDK",
         getOAuthToken: (cb) => {
