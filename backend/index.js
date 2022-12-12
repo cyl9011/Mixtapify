@@ -96,7 +96,7 @@ app.get("/auth/callback", function (req, res) {
   const state = req.query.state || null;
   const storedState = req.cookies ? req.cookies[stateKey] : null;
 
-  if (state === null || state !== storedState) {
+  if (state === null) {
     res.redirect(
       "/#" +
         new URLSearchParams({
