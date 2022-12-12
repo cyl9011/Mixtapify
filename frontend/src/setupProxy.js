@@ -4,13 +4,13 @@ module.exports = function (app) {
   app.use(
     "/auth/**",
     createProxyMiddleware({
-      target: "http://localhost:3001",
+      target: "https://sounds-around-us.herokuapp.com",
     })
   );
   app.use(
     "/api/**",
     createProxyMiddleware({
-      target: "http://localhost:3001",
+      target: "https://sounds-around-us.herokuapp.com",
     })
   );
 };
