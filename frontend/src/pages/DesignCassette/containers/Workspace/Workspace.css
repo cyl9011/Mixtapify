@@ -6,8 +6,8 @@
   border-left-width: 0px;
   background-color: white;
 
-  width: 600px;
-  height: 700px;
+  width: 575px;
+  height: 450px;
 
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@
 #workspace-canvas,
 .Workspace #workspace-svg,
 .Workspace #cassette img {
-  top: 25%;
+  top: 10%;
   left: 8%;
 }
 

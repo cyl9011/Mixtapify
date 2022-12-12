@@ -1,5 +1,5 @@
 import styles from "./Tracks.module.css";
-import { fromMS, idFn } from "../../lib/helpers";
+import { fromMS, idFn, reorderTrack } from "../../lib/helpers";
 import DeleteIcon from "@mui/icons-material/Delete";
 import cn from "classnames";
 
@@ -7,7 +7,7 @@ function Tracks({ tracks, clickTrack, deleteTrack, currentTrack }) {
   return (
     <div
       className={tracks?.length > 0 ? styles.container : ""}
-      style={{ height: "auto"}}
+      style={{ height: "auto" }}
     >
       {tracks?.map((track, index) => {
         const { image, duration_ms, name, album, artists } = track;
@@ -24,6 +24,7 @@ function Tracks({ tracks, clickTrack, deleteTrack, currentTrack }) {
             key={key}
             name={name}
             onClick={clickTrack ? () => clickTrack(track, index) : idFn}
+            onDrag={reorderTrack ? () => reorderTrack(track, index) : idFn}
             deleteTrack={deleteTrack ? () => deleteTrack(index) : undefined}
           />
         );
@@ -40,6 +41,7 @@ function Track({
   album,
   duration_ms,
   onClick = idFn,
+  onDrag = reorderTrack,
   deleteTrack,
   currentTrack,
 }) {
